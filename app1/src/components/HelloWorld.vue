@@ -1,14 +1,14 @@
 <template>
   <div class="hello">
-      <span>{{left}}</span>
+      <router-link :to="{name:leftto}"><span class="spans">{{left}}</span></router-link>
       <div>{{name}}</div>
-      <p>{{right}}</p>
+      <router-link :to="{name:rightto}"><p class="ps">{{right}}</p></router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'hello',
   props:{
       left:{
           type:String
@@ -18,13 +18,20 @@ export default {
       },
       right:{
           type: String
+      },
+      rightto:{
+        type:String
+      },
+      leftto:{
+        type:String
       }
   },
   data () {
     return {
 
     }
-  }
+  },
+  
 }
 </script>
 
@@ -38,7 +45,7 @@ export default {
   position: fixed;
   top: 0;
 }
-.hello>span{
+.spans{
   float: left;
   padding-left: 10px;
   font-size: 20px;
@@ -52,7 +59,7 @@ export default {
   color: #eee;
   line-height: 50px;
 }
-.hello>p{
+.ps{
   float: right;
   font-size: 12px;
   padding-right: 30px;

@@ -1,0 +1,7 @@
+HelloWorld：头部组件
+属性:  
+left 左边文字   
+name 中间文字  
+right 右边文字 
+leftto 是左边跳转路由 值是路由的name 
+rightto: 是右边跳转路由 值是路由的name
