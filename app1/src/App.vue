@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style>
+<<<<<<< HEAD
 
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -43,4 +44,17 @@ export default {
     display: block;
     clear: both;
   }
+=======
+*{
+  margin: 0;
+  padding: 0;
+}
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+>>>>>>> 83ff969f2f8bc4fd3069cb5bfb66e9b7f849a045
 </style>
