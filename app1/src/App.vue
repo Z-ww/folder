@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-		<hello></hello>
+		<router-link to="/"></router-link>
+    <router-view/>
   </div>
+
 </template>
 
 <script>
 	import hello from './components/HelloWorld.vue'
-	
+
 
 export default {
   name: 'App',
