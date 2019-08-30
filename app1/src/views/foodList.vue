@@ -25,7 +25,7 @@
 			</div>
         
 
-        <!-- <div class="item">
+        <div class="item">
 				<div class="hd">
 					<span class="glyphicon glyphicon-home" style="color:#ccc"></span>
 					<span style="color:#999">附近商家</span>
@@ -55,10 +55,10 @@
 								<span>
 									月售{{i.recent_order_num}}单
 								</span>
-								<h4>
+								<h5>
 									<span>{{i.delivery_mode.text}}</span>
 									<span>{{i.supports[1].name}}</span>
-								</h4>
+								</h5>
 						</div>
 						<div class="shop_p2">
 							<p>
@@ -74,7 +74,7 @@
 						</div>
 					</hgroup>
 				</div>
-			</div> -->
+			</div>
     </div>
 </template>
 <script>
@@ -92,13 +92,11 @@ export default{
     components:{headers},
     created(){
         
-      
-       
     },
     mounted() {
           this.gain()
 			new Swiper('.swiper-container', {
-				loop: true,
+				loop: false,
 				// 如果需要分页器
 				pagination: {
 					el: '.swiper-pagination',
@@ -116,15 +114,15 @@ export default{
 				this.$http.get('https://elm.cangdu.org/v2/index_entry', ).then((data) => {
 					var dat = data.data;
 					this.da2 = dat.splice(8, 16);
-
-				})
+				}),
+				this.rest()
             },
 			rest() {
-				var ars = this.go.split(',');
+				// var ars = this.go.split(',');ars[0], ars[1]
 				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
 					params: {
-						latitude: ars[0],
-						longitude: ars[1]
+						latitude: 31.234035,
+						longitude:121.510013
 					}
 				}).then((data) => {
 					console.log(data);
@@ -157,13 +155,127 @@ export default{
 		font-size: 14px;
 		min-height: 50px;
 	}
+	.item {
+		border-top: 20px solid #f5f5f5;
+		overflow: hidden;
+	}
+	.hd {
+		height: 30px;
+		line-height: 30px;
+		font-size: 14px;
+		padding: 0 10px;
+		opacity: 0.9;
+		margin-top:4px
+	}
 	
+	.con {
+		text-align: center;
+	}
 	.list img {
 		width: 40%;
 		height: 40px;
 		margin-bottom: 12px;
 	}
+		.lists {
+		border-bottom: 2px solid #f1f1f1;
+		padding: 10px;
+		overflow: hidden;
+	}
 	
-
+	.shop_img {
+		margin-right: 10px;
+		width: 70px;
+		height: 70px;
+		float: left;
+	}
+	
+	.shop_right {
+		overflow: hidden;		
+	}
+	.shop_detail_header{
+		overflow: hidden;
+	}
+	.shop_detail_header::before{
+		    content: "\54C1\724C";
+		    float: left;
+		    font-size:.3rem;
+		    line-height: 18px;
+		    color: #333;
+		    background-color: #ffd930;
+		    padding: 0 4px;
+		    border-radius: 4px;
+		    margin-right: 10px;
+	    
+    }
+   .shop_title{
+   		font-size: 14px;
+   		font-weight: bold;
+   		float: left;
+   		overflow: hidden;
+   		text-overflow: ellipsis;
+   		width:120px;
+   		white-space: nowrap
+   }
+   .shop_detail_header .shop_detail_ul{
+		list-style: none;
+		float: right;
+	}
+	.shop_detail_header .shop_detail_ul li{
+		float: left;
+		font-size: 12px;
+		color:#999
+	}
+	.shop_p1{
+		/* padding: 10px; */
+		font-size: 10px;
+		margin: 8px 0;
+	}
+	.shop_p1 ul{
+		float: left;
+	}
+	.shop_p1 ul li{
+		color:#ff9a0d;
+		float: left;
+	}
+	.shop_p1s{
+		color:#ff6000;
+		margin-left: 10px;
+	}
+	.shop_p1 h5{
+		float: right;
+	}
+	.shop_p1 h5 span{
+		border-radius:2px;
+		font-size: .02rem;
+	}
+	.shop_p1 h5 span:first-of-type{
+		    color: #fff;
+		    background-color: #3190e8;
+		    border: 2px solid #3190e8;
+	}
+	.shop_p1 h5 span:last-of-type{
+		color: #3190e8;
+    	border: 2px solid #3190e8;
+	}
+	.shop_p2{
+		font-size: 10px;
+	}
+	.segmentation{
+		margin: 0 4px;
+	}
+	.shop_p2 p:first-of-type{
+		float: left;
+		color: #666;
+	}
+	.shop_p2 p:last-of-type{
+		float: right;
+		color: #666;
+	}
+	.shop_p2 p:last-of-type span:last-of-type{
+		color: #3190e8;
+	}
+	.hello{
+		z-index:4;
+	}
 	
 </style>
