@@ -7,6 +7,7 @@ import VueResource from 'vue-resource'
 import 'lib-flexible/flexible'
 
 Vue.use(VueResource)
+import './assets/font/iconfont.css'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
