@@ -20,6 +20,16 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
+    },
+    {
+      path: '/city',
+      name: 'city',
+      component: () => import(/* webpackChunkName: "city" */ '../views/city.vue')
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: () => import(/* webpackChunkName: "shop" */ '../views/shop.vue')
     }
   ]
 })

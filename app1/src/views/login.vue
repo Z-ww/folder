@@ -13,6 +13,9 @@
         <input type="text" placeholder="验证码" v-model="code">
         <div class="auth">
           <img :src="img" alt="">
+          <div @click="code_img">
+            <span>看不清<br/><span style="color: blue;">换一张</span></span>
+          </div>
         </div>
       </div>
     </div>
@@ -29,10 +32,11 @@
 
 <script>
 
-  import HelloWorld from '@/components/HelloWorld.vue'
+    import HelloWorld from '@/components/HelloWorld.vue'
+
     export default {
         name: "login",
-        components:{
+        components: {
             HelloWorld
         },
         data() {
@@ -44,25 +48,33 @@
             }
         },
         methods: {
-            login(){
-               this.$http.post('https://elm.cangdu.org/v2/login',{
-                   username: this.user,
-                   password: this.pass,
-                   captcha_code: this.code,
-               },{
-                   emulateJSON: true
-               }).then((data)=>{
-                   console.log(data)
-               })
+            login() {
+                this.axios.post('https://elm.cangdu.org/v2/login', {
+                    username: this.user,
+                    password: this.pass,
+                    captcha_code: this.code,
+                }, {
+                    emulateJSON: true
+                }).then((response)=>{
+                    console.log(response.data)
+                }).catch((response)=>{
+                    console.log(response)
+                })
+            },
+            code_img() {
+                this.axios.post('https://elm.cangdu.org/v1/captchas', {
+                    emulateJSON: true
+                }).then((response)=>{
+                    this.img=response.data.code
+                    console.log(response.data)
+                }).catch((response)=>{
+                    console.log(response)
+                })
             }
         },
         created() {
-            this.$http.post('https://elm.cangdu.org/v1/captchas', {
-                emulateJSON: true
-            }).then((data) => {
-                this.img = data.body.code
-            })
-            this.$http.get('https://elm.cangdu.org/v1/user').then((data)=>{
+           this.code_img()
+            this.axios.get('https://elm.cangdu.org/v1/user').then((data) => {
                 console.log(data)
             })
         }
@@ -73,9 +85,11 @@
   .login {
     width: 100%;
   }
-  .kong{
+
+  .kong {
     height: 50px;
   }
+
   .from {
     width: 100%;
     background-color: #fff;
@@ -116,5 +130,12 @@
     position: absolute;
     right: 40px;
     top: 170px;
+  }
+
+  .auth > div {
+    position: absolute;
+    right: -1rem;
+    top: -0.1rem;
+    font-size: 12px;
   }
 </style>

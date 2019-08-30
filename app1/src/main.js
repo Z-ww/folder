@@ -5,10 +5,13 @@ import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 import 'lib-flexible/flexible'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios,axios,VueResource);
 
-Vue.use(VueResource)
 import './assets/font/iconfont.css'
 Vue.config.productionTip = false
+axios.defaults.withCredentials = true;
 
 /* eslint-disable no-new */
 new Vue({
