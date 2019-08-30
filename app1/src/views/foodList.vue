@@ -12,7 +12,6 @@
 								<p>{{i.title}}</p>
 							</div>
 						</div>
-
 						<div class="swiper-slide">
 							<div class="list" v-for='i in da2'>
 								<img :src="'https://fuss10.elemecdn.com'+i.image_url" alt="" />
@@ -23,8 +22,6 @@
 					<div class="swiper-pagination"></div>
 				</div>
 			</div>
-        
-
         <div class="item">
 				<div class="hd">
 					<span class="glyphicon glyphicon-home" style="color:#ccc"></span>
