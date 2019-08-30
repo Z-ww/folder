@@ -7,7 +7,7 @@
 </template>
 
 <script>
-	import hello from './components/HelloWorld.vue'
+	import hello from '@/components/HelloWorld.vue'
 
 
 export default {
@@ -21,4 +21,24 @@ export default {
   margin: 0;
   padding: 0;
 }
+  *{
+    margin:0;
+    padding:0;
+  }
+  html,body{
+    width:100%;
+    height:100%;
+    background-color: #f5f5f5;
+  }
+  ul{list-style:none}
+  a{text-decoration: none;}
+  img{vertical-align:top;border:none}
+
+  .clearf:after,
+  .clearf:before {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
 </style>

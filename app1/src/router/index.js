@@ -20,7 +20,13 @@ export default new Router({
     {
       path: '/foodList',
       name: 'foodList',
-      component:foodList
+      component:foodList,
+      component: () => import(/* webpackChunkName: "mine" */ '../views/foodList.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
     }
   ]
 })

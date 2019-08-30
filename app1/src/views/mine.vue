@@ -1,7 +1,7 @@
 <template>
   <div class="mine">
     <!--            头部登录注册-->
-    <router-link to="">
+    <router-link to="/login">
       <div class="mylogin clearf">
         <div class="left">
           <img src="" alt="">
@@ -16,7 +16,7 @@
       </div>
     </router-link>
           <!--    余额积分-->
-    <div class="money">
+    <div class="money clearf">
       <div class="balance">
         <div>
           <span>0.00</span>元
@@ -38,6 +38,7 @@
 
     </div>
   </div>
+
 </template>
 
 <script>
@@ -47,9 +48,6 @@
 </script>
 
 <style scoped>
-  .body{
-    background-color: #f5f5f5;
-  }
 
   .mine {
     width: 375px;

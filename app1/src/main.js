@@ -3,8 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import 'lib-flexible/flexible'
 import VueResource from 'vue-resource'
+import 'lib-flexible/flexible'
+import './assets/font/iconfont.css'
 Vue.config.productionTip = false
 Vue.use(VueResource)
 /* eslint-disable no-new */
