@@ -1,3 +1,12 @@
+
+
+
+<!--把to的name改成搜索路由名-->
+
+
+
+
+
 <template>
     <div class="home">
      <hello-world left="elm.en" right="登陆|注册"></hello-world>
@@ -5,20 +14,21 @@
       <div>
       	<div class="z-left">当前定位城市：<span>定位不标时，请在城市列表中选择</span></div>
       	<div class="z-Location">
-      		<router-link to='' style="color: #3190e8;">{{Location}}<span>></span></router-link>
+      		<router-link :to='{name:"mine",params:{id:Location.id}}' style="color: #3190e8;">{{Location.name}}<span>></span></router-link>
+      							
       	</div>
       </div>
       <div class="z-box">
       	<p>热门城市</p>
       	<div class="z-box1" v-for='i,index in home'>
-      		<router-link  :key='index' to=''>{{i.name}}</router-link>
+      		<router-link  :key='index' :to='{name:"mine",params:{id:i.id}}'>{{i.name}}</router-link>
       	</div>
       </div>
       <div style="width: 100%;">
       	<div class="z-Allcities" v-for='i,index,key in Allcities'>
       	<h2>{{index}}{{Sort}}</h2>
       	<div class="z-Allcities1" v-for='a in i'>
-      		<router-link  :key='index' to=''>{{a.name}}</router-link>
+      		<router-link  :key='index' :to='{name:"mine",params:{id:a.id}}'>{{a.name}}</router-link>
       	</div>
       </div>
       </div>
@@ -53,8 +63,8 @@
         		this.home=data.data
         	}),
         	this.$http.get('https://elm.cangdu.org/v1/cities?type=guess').then(data =>{
-//      		console.log(data.data.name)
-        		this.Location=data.data.name
+//      		console.log(data.data)
+        		this.Location=data.data
         	}),
         	this.$http.get('https://elm.cangdu.org/v1/cities?type=group').then(data =>{
         		this.Allcities=data.data
@@ -84,6 +94,7 @@
 	line-height: 40px;
 	border: 1px solid #e4e4e4;
 	box-sizing: border-box;
+	text-align: center;
 }
 .z-box1 a{
 	color: #3190e8;
@@ -114,6 +125,7 @@
 .z-Allcities{
 	/*padding:0px 20px 0px 20px;*/
 	width: 100%;
+	text-align: center;
 	border-top:.4rem #e4e4e4 solid;
 	overflow: hidden;
 }
