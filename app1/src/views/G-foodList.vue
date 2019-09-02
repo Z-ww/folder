@@ -7,13 +7,13 @@
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
-							<div class="list" v-for='i in da1' :key="index">
+							<div class="list" v-for='i in da1' :key="i">
 								<img :src="'https://fuss10.elemecdn.com'+i.image_url" alt="" />
 								<p>{{i.title}}</p>
 							</div>
 						</div>
 						<div class="swiper-slide">
-							<div class="list" v-for='i in da2' :key="index">
+							<div class="list" v-for='i in da2' :key="i">
 								<img :src="'https://fuss10.elemecdn.com'+i.image_url" alt="" />
 								<p>{{i.title}}</p>
 							</div>
@@ -27,7 +27,7 @@
 					<span class="glyphicon glyphicon-home" style="color:#ccc"></span>
 					<span style="color:#999">附近商家</span>
 				</div>
-				<div class="lists" v-for="i in store" :key="index">
+				<div class="lists" v-for="i in store" :key="i">
 					<section>
 						<img :src="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" />
 					</section>
@@ -44,7 +44,7 @@
 						<div class="shop_p1">
 								<ul>
 									<li>
-										<span v-for='i in 5' class="glyphicon glyphicon-star" :key="index"></span>
+										<span v-for='i in 5' class="glyphicon glyphicon-star" :key="i"></span>
 										
 									</li>
 								</ul>
