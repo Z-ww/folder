@@ -24,12 +24,14 @@
                 </ul>
             </div>
         </div>
+        <bottoms :take="'foodList'" :order="''" :my="''" :search="'search'"></bottoms>
     </div>
 </template>
 <script>
+import bottoms from '../components/bottom'
 import headerBar from '../components/HelloWorld'
 export default{
-    components:{headerBar},
+    components:{headerBar,bottoms},
     data(){
         return{
             txt:'',
@@ -40,7 +42,10 @@ export default{
         }
     },
     created(){
-         this.ars = JSON.parse(localStorage.searchHistory)
+        if(localStorage.searchHistory.length){
+            this.ars = JSON.parse(localStorage.searchHistory)
+        }
+         
     },
     methods:{
         btn(){

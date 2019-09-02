@@ -50,6 +50,7 @@ export default {
     position: fixed;
     border: 1px solid #eee;
     bottom: 0;
+    background-color: #fff;
 }
 .btm div{
     width: 25%;
