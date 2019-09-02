@@ -32,6 +32,16 @@ export default new Router({
       path: '/search/geohash',
       name: 'search',
       component:search
+    },
+    {
+      path: '/city',
+      name: 'city',
+      component: () => import(/* webpackChunkName: "city" */ '../views/city.vue')
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: () => import(/* webpackChunkName: "shop" */ '../views/shop.vue')
     }
   ]
 })

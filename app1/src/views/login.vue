@@ -13,6 +13,9 @@
         <input type="text" placeholder="验证码" v-model="code">
         <div class="auth">
           <img :src="img" alt="">
+          <div @click="code_img">
+            <span>看不清<br/><span style="color: blue;">换一张</span></span>
+          </div>
         </div>
       </div>
     </div>
@@ -29,10 +32,11 @@
 
 <script>
 
-  import HelloWorld from '@/components/HelloWorld.vue'
+    import HelloWorld from '@/components/HelloWorld.vue'
+
     export default {
         name: "login",
-        components:{
+        components: {
             HelloWorld
         },
         data() {
@@ -41,30 +45,45 @@
                 user: '',//账号
                 pass: '',//密码
                 code: '',//验证码
+                list_user: '',//登录成功后个人的信息
             }
         },
         methods: {
-            login(){
-               this.$http.post('https://elm.cangdu.org/v2/login',{
-                   username: this.user,
-                   password: this.pass,
-                   captcha_code: this.code,
-               },{
-                   emulateJSON: true
-               }).then((data)=>{
-                   console.log(data)
-               })
-            }
+            login() {
+                this.axios.post('https://elm.cangdu.org/v2/login', {
+                    username: this.user,
+                    password: this.pass,
+                    captcha_code: this.code,
+                }, {
+                    emulateJSON: true
+                }).then((response)=>{
+                    this.list_user=response.data
+                    this.Usercity()
+                   location.href='http://localhost:8081/#/mine'
+                }).catch((response)=>{
+                    console.log(response)
+                })
+            },
+            code_img() {
+                this.axios.post('https://elm.cangdu.org/v1/captchas', {
+                    emulateJSON: true
+                }).then((response)=>{
+                    this.img=response.data.code
+                }).catch((response)=>{
+                })
+            },
+            Usercity(){
+                this.$store.commit('setUsercity',this.list_user.city)
+                this.$store.commit('setUserimg',this.list_user.avatar)
+                this.$store.commit('setUserid',this.list_user.id)
+                this.$store.commit('setUsername',this.list_user.username)
+                this.$store.commit('setUserpoint',this.list_user.point)
+                this.$store.commit('setUsergift',this.list_user.gift_amount)
+            },
+
         },
         created() {
-            this.$http.post('https://elm.cangdu.org/v1/captchas', {
-                emulateJSON: true
-            }).then((data) => {
-                this.img = data.body.code
-            })
-            this.$http.get('https://elm.cangdu.org/v1/user').then((data)=>{
-                console.log(data)
-            })
+           this.code_img()
         }
     }
 </script>
@@ -73,9 +92,11 @@
   .login {
     width: 100%;
   }
-  .kong{
+
+  .kong {
     height: 50px;
   }
+
   .from {
     width: 100%;
     background-color: #fff;
@@ -116,5 +137,12 @@
     position: absolute;
     right: 40px;
     top: 170px;
+  }
+
+  .auth > div {
+    position: absolute;
+    right: -1rem;
+    top: -0.1rem;
+    font-size: 12px;
   }
 </style>

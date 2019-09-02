@@ -4,13 +4,17 @@
     <router-link to="/login">
       <div class="mylogin clearf">
         <div class="left">
-          <img src="" alt="">
+          <img :src="userImg" alt="">
         </div>
         <div class="right clearf">
-          <div class="l">
+          <div class="lv" v-if="userName">
+            {{userName}}
+          </div>
+          <div class="l" v-else>
             <h2>登录/注册</h2>
             <p>暂无绑定手机号</p>
           </div>
+
           <div class="r">></div>
         </div>
       </div>
@@ -43,8 +47,20 @@
 
 <script>
     export default {
-        name: "mine"
+        name: "mine",
+        data(){
+            return{
+                userImg: '',
+                userName: '',
+            }
+        },
+        created(){
+            this.userImg=this.$store.state.user.userImg
+            this.userName=this.$store.state.user.userName
+            console.log(this.$store.state.user.userName)
+        }
     }
+
 </script>
 
 <style scoped>
@@ -82,7 +98,11 @@
   .l {
     float: left;
   }
-
+  .lv{
+    font-size: 20px;
+    line-height: 60px;
+    float: left;
+  }
   .l h2 {
     font-size: 20px;
     margin-top: 12px;

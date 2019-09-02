@@ -45,25 +45,32 @@ export default {
   overflow: hidden;
   position: fixed;
   top: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 .spans{
   float: left;
-  padding-left: 10px;
   font-size: 20px;
   color: #eee;
   line-height: 50px;
 }
 .hello>div{
-  float: left;
-  padding-left: 130px;
-  font-size: 24px;
-  color: #eee;
-  line-height: 50px;
+  width: 50%;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
 }
 .ps{
   float: right;
   font-size: 12px;
-  padding-right: 30px;
   color: #eee;
   line-height: 50px;
 }
