@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/home'
-import foodList from '../views/foodList'
 
 Vue.use(Router)
 
@@ -20,7 +19,6 @@ export default new Router({
     {
       path: '/foodList',
       name: 'foodList',
-      component:foodList,
       component: () => import(/* webpackChunkName: "mine" */ '../views/foodList.vue')
     },
     {

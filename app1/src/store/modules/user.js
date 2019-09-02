@@ -1,6 +1,6 @@
 export default{
     state:{
-        userName:'222111',
+        userName:'',
         userId:'',//ID
         userPoint:'',//积分
         userGift:'',//优惠券

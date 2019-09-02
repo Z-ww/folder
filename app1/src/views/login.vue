@@ -45,6 +45,7 @@
                 user: '',//账号
                 pass: '',//密码
                 code: '',//验证码
+                list_user: '',//登录成功后个人的信息
             }
         },
         methods: {
@@ -56,7 +57,9 @@
                 }, {
                     emulateJSON: true
                 }).then((response)=>{
-                    console.log(response.data)
+                    this.list_user=response.data
+                    this.Usercity()
+                   location.href='http://localhost:8081/#/mine'
                 }).catch((response)=>{
                     console.log(response)
                 })
@@ -66,17 +69,21 @@
                     emulateJSON: true
                 }).then((response)=>{
                     this.img=response.data.code
-                    console.log(response.data)
                 }).catch((response)=>{
-                    console.log(response)
                 })
-            }
+            },
+            Usercity(){
+                this.$store.commit('setUsercity',this.list_user.city)
+                this.$store.commit('setUserimg',this.list_user.avatar)
+                this.$store.commit('setUserid',this.list_user.id)
+                this.$store.commit('setUsername',this.list_user.username)
+                this.$store.commit('setUserpoint',this.list_user.point)
+                this.$store.commit('setUsergift',this.list_user.gift_amount)
+            },
+
         },
         created() {
            this.code_img()
-            this.axios.get('https://elm.cangdu.org/v1/user').then((data) => {
-                console.log(data)
-            })
         }
     }
 </script>
