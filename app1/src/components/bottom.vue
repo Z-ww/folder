@@ -24,6 +24,9 @@ export default {
       },
       my:{
         type:String
+      },
+      nums:{
+          type:Number
       }
   },
   data () {
@@ -35,6 +38,7 @@ export default {
     }
   },
   created() {
+      this.is = this.nums
       console.log(this.num)
   },
   
