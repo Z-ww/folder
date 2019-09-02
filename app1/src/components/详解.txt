@@ -5,14 +5,3 @@ name 中间文字
 right 右边文字 
 leftto 是左边跳转路由 值是路由的name 
 rightto: 是右边跳转路由 值是路由的name
-
-
-bottom:底部组件 
-
-take 外卖的跳转路由 写组件的name名
-
-search 搜索的跳转路由 写组件的name名
-
-order 订单的跳转路由 写组件的name名
-
-my 个人中心的跳转路由 写组件的name名
