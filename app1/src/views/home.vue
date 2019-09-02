@@ -4,9 +4,6 @@
 <!--把to的name改成搜索路由名-->
 
 
-
-
-
 <template>
     <div class="home">
      <hello-world left="elm.en" right="登陆|注册"></hello-world>
@@ -15,7 +12,7 @@
       	<div class="z-left">当前定位城市：<span>定位不标时，请在城市列表中选择</span></div>
       	<div class="z-Location">
       		<router-link :to='{name:"mine",params:{id:Location.id}}' style="color: #3190e8;">{{Location.name}}<span>></span></router-link>
-      							
+
       	</div>
       </div>
       <div class="z-box">
@@ -32,15 +29,15 @@
       	</div>
       </div>
       </div>
-      
+
     </div>
 </template>
 
 <script>
-	
+
 	import HelloWorld from '@/components/HelloWorld.vue'
     export default {
-    
+
         name: "home",
         components:{
         	HelloWorld
@@ -52,9 +49,9 @@
         		Allcities:'',
         	}
         },computed:{
-        	
-        	Sort(){  		
-			
+
+        	Sort(){
+
         	}
         },
         created(){
