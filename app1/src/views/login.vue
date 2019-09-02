@@ -27,17 +27,20 @@
     {{user}}
     {{pass}}
     {{code}}
+        <bottoms :take="'foodList'" :order="'order'" :my="'login'" :search="'search'"></bottoms>
   </div>
 </template>
 
 <script>
 
     import HelloWorld from '@/components/HelloWorld.vue'
+    import bottoms from '@/components/bottom.vue'
 
     export default {
         name: "login",
         components: {
-            HelloWorld
+            HelloWorld,
+            bottoms
         },
         data() {
             return {
