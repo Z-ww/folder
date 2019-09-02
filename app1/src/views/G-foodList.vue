@@ -1,8 +1,8 @@
 <template>
     <div>
-      <div>
-           <headers></headers>
-      </div>
+           <headers :left="'111'" :leftto="'search'" name='222' right='登陆/注册' :rightto="'login'">
+
+		   </headers>
       <div class="msite_nav">
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
@@ -136,10 +136,11 @@ export default{
     }
     .swiper-container {
         width: 100%;
-        height: 230px;
+        height: 210px;
     }  
     .msite_nav{
         margin-top:50px;
+		background:white;
     }
     .list{
 		width: 25%;
@@ -155,6 +156,7 @@ export default{
 	.item {
 		border-top: 20px solid #f5f5f5;
 		overflow: hidden;
+		background: white
 	}
 	.hd {
 		height: 30px;
@@ -274,5 +276,5 @@ export default{
 	.hello{
 		z-index:4;
 	}
-	
+
 </style>

@@ -1,0 +1,152 @@
+<template>
+    <div>
+        
+        <headerBar :left="'<'" :leftto="'foodList'" :name="'搜索'" ></headerBar>
+        <div class="sear">
+            <input type="text" placeholder="请输入商家或美食名称" v-model="txt" @input='inp($event)'>
+            <button @click='btn()'>提交</button>
+        </div>
+       <div v-if='typess'>
+            <div v-if='types'>
+               111
+        </div>
+        <div v-else class="sear_txt">
+                很抱歉！！！搜索无结果 
+        </div>
+       </div>
+      
+        <div class="sear_his" v-else>
+            <p>搜索历史</p>
+            <div>
+                <ul>
+                    <li v-for='(i,index) in ars' :key="index">{{i}}<span @click='clear(index)'>✘</span></li>
+                    <li class="clears" @click='allclear' v-show='ars.length!=0'>清空搜索历史</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import headerBar from '../components/HelloWorld'
+export default{
+    components:{headerBar},
+    data(){
+        return{
+            txt:'',
+            types:'',
+            txts:'',
+            ars:[],
+            typess:''
+        }
+    },
+    created(){
+         this.ars = JSON.parse(localStorage.searchHistory)
+    },
+    methods:{
+        btn(){
+            this.$http.get('https://elm.cangdu.org/v4/restaurants',{
+              params:{
+                    geohash:'31.22967,121.4762',
+                    keyword:this.txt
+              }
+            }).then((data)=>{
+                console.log(data)
+                this.types = data.data.status
+                // this.txts = data.data.message
+            })
+            this.ars.push(this.txt)
+            localStorage.searchHistory = JSON.stringify(this.ars)
+            this.typess = true
+        },
+        inp(e){
+            console.log(e.target.value);
+            if(e.target.value == ''){
+                this.typess = false;
+            }
+        },
+        clear(i){
+            var arss = JSON.parse(localStorage.searchHistory);
+            arss.splice(i,1);
+            console.log(arss);
+            localStorage.searchHistory = JSON.stringify(arss);
+            this.ars = arss
+        },
+        allclear(){
+            localStorage.searchHistory = [];
+            this.ars = []
+        }
+    },
+}
+</script>
+<style scoped>
+*{margin:0;padding:0};
+html,body{
+    width:100%;
+    height:100%;
+    background-color: #f5f5f5;
+}
+.sear{
+    padding: 10px;
+    background: white
+}
+.sear input{
+    margin-top: 50px;
+    width:70%;
+    height:30px;
+    /* background:  */
+    border: 1px solid #e4e4e4;
+    color: #333;
+    font-size: 14px;
+    color: #333;
+    border-radius: 4px;
+    background-color: #ededed;
+    font-weight: 700;
+    padding: 0px 6px
+}
+.sear_txt{
+    margin: 0 auto;
+    font: .4rem/1rem Microsoft YaHei;
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+    margin-top: .125rem;
+}
+.sear button{
+    width:20%;
+    height:32px;
+    border: 1px solid #3190e8;
+    margin-left: 6px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
+    background-color: #3190e8;
+    font-weight: 700;
+    padding: 0 4px;
+}
+.sear_his p{
+    font-size: .4rem;
+    line-height: 1.3rem;
+    text-indent: .5rem;
+    font-weight: 700;
+    color: #666;
+}
+.sear_his li{
+    font-size: 20px;
+    padding: 10px 0 ;
+    padding-left: 6px;
+    background: white;
+    overflow: hidden;
+    border-bottom: .025rem solid #e4e4e4;
+}
+.sear_his span{
+    float:right;
+    margin-right: 20px
+}
+.sear_his .clears{
+    text-align: center;
+        color: #3190e8;
+        font-size: 16px;
+        font-weight: 600
+        
+}
+</style>
