@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 import 'lib-flexible/flexible'
+<<<<<<< HEAD
+import store from './store/store.js'
+Vue.use(VueResource)
+=======
+>>>>>>> 34887b22132bbaf449faaa9ebb2d0677d133c893
 import './assets/font/iconfont.css'
 Vue.config.productionTip = false
 Vue.use(VueResource)
@@ -12,6 +17,7 @@ Vue.use(VueResource)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
