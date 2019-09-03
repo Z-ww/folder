@@ -4,17 +4,13 @@
     <router-link to="/login">
       <div class="mylogin clearf">
         <div class="left">
-          <img :src="userImg" alt="">
+          <img src="" alt="">
         </div>
         <div class="right clearf">
-          <div class="lv" v-if="userName">
-            {{userName}}
-          </div>
-          <div class="l" v-else>
+          <div class="l">
             <h2>登录/注册</h2>
             <p>暂无绑定手机号</p>
           </div>
-
           <div class="r">></div>
         </div>
       </div>
@@ -23,44 +19,39 @@
     <div class="money clearf">
       <div class="balance">
         <div>
-          <span>0.00</span>元
+          <span style="color: orange;">0.00</span>元
         </div>
-        <p>我的余额</p>
+       <router-link to='/balance'><p>我的余额</p></router-link> 
       </div>
       <div class="balance">
         <div>
-          <span>0</span>个
+          <span style="color: red;">0</span>个
         </div>
         <p>我的优惠</p>
       </div>
       <div class="balance">
         <div>
-          <span>0.00</span>分
+          <span style="color: green;">0.00</span>分
         </div>
         <p>我的积分</p>
       </div>
 
     </div>
+      <div id="list">
+				<li><i class="iconfont icon-icon-order"></i>我的订单<span>></span></li>
+				<li>积分商城<span>></span></li>
+				<li>饿了么会员卡<span>></span></li>
+				<router-link to='/fuwu'><li>服务中心<span>></span></li></router-link>
+				<li>下载饿了么App<span>></span></li>
+			</div>
   </div>
 
 </template>
 
 <script>
     export default {
-        name: "mine",
-        data(){
-            return{
-                userImg: '',
-                userName: '',
-            }
-        },
-        created(){
-            this.userImg=this.$store.state.user.userImg
-            this.userName=this.$store.state.user.userName
-            console.log(this.$store.state.user.userName)
-        }
+        name: "mine"
     }
-
 </script>
 
 <style scoped>
@@ -98,11 +89,7 @@
   .l {
     float: left;
   }
-  .lv{
-    font-size: 20px;
-    line-height: 60px;
-    float: left;
-  }
+
   .l h2 {
     font-size: 20px;
     margin-top: 12px;
@@ -140,5 +127,23 @@
 
   .balance:last-child {
     border-right: none;
+  }
+  #list{
+  	margin-top: 10px;
+  	float: left;
+  	width: 375px;
+  	height: auto;
+  }
+  #list li{
+  	list-style: none;
+  	font-size: 16px;
+  	height: 35px;
+  	color: #000;
+  	padding-left: 30px;
+  	position: relative;
+  }
+  #list li span{
+  	position: absolute;
+  	left: 350px;
   }
 </style>

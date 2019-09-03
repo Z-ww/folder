@@ -44,46 +44,38 @@
                 img: '',//验证码图片
                 user: '',//账号
                 pass: '',//密码
-                code: '',//验证码
-                list_user: '',//登录成功后个人的信息
+                code: '',//验证码 
             }
         },
         methods: {
             login() {
-                this.axios.post('https://elm.cangdu.org/v2/login', {
+                this.$http.post('https://elm.cangdu.org/v2/login', {
                     username: this.user,
                     password: this.pass,
                     captcha_code: this.code,
                 }, {
                     emulateJSON: true
-                }).then((response)=>{
-                    this.list_user=response.data
-                    this.Usercity()
-                   location.href='http://localhost:8081/#/mine'
-                }).catch((response)=>{
-                    console.log(response)
+                }).then((data) => {
+                    console.log(data)
                 })
             },
             code_img() {
-                this.axios.post('https://elm.cangdu.org/v1/captchas', {
+                this.$http.post('https://elm.cangdu.org/v1/captchas', {
                     emulateJSON: true
-                }).then((response)=>{
-                    this.img=response.data.code
-                }).catch((response)=>{
+                }).then((data) => {
+                    this.img = data.body.code
                 })
-            },
-            Usercity(){
-                this.$store.commit('setUsercity',this.list_user.city)
-                this.$store.commit('setUserimg',this.list_user.avatar)
-                this.$store.commit('setUserid',this.list_user.id)
-                this.$store.commit('setUsername',this.list_user.username)
-                this.$store.commit('setUserpoint',this.list_user.point)
-                this.$store.commit('setUsergift',this.list_user.gift_amount)
-            },
-
+            }
         },
         created() {
-           this.code_img()
+            this.$http.post('https://elm.cangdu.org/v1/captchas', {
+                emulateJSON: true
+            }).then((data) => {
+                this.img = data.body.code
+            })
+            this.$http.get('https://elm.cangdu.org/v1/user').then((data) => {
+                console.log(data)
+            })
         }
     }
 </script>
