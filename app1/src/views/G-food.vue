@@ -1,36 +1,34 @@
 <template>
     <div>
-           <headers :left="'111'" :leftto="'search'" name='222' right='登陆/注册' :rightto="'login'">
-
-		   </headers>
-      <div class="msite_nav">
-				<div class="swiper-container">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<div class="list" v-for='(i,index) in da1' :key="index">
-								<router-link :to="{path:'/food',query:{geohash:'31.234035,121.510013',title:i.title,restaurant_category_id:i.restaurant_category_id}}">
-									<img :src="'https://fuss10.elemecdn.com'+i.image_url" alt="" />
-									<p>{{i.title}}</p>
-								</router-link>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="list" v-for='(i,index) in da2' :key="index">
-								<router-link :to="{path:'/food'}">
-									<img :src="'https://fuss10.elemecdn.com'+i.image_url" alt="" />
-									<p>{{i.title}}</p>
-								</router-link>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-pagination"></div>
-				</div>
+		
+        <headers :left="'<'" :name="titl" :leftto="'foodList'"></headers>
+        <div class="sort_container">
+            <div class="sort_item" v-for="(i,ins) in con_ar" :key="ins" :class="ins == indexs ? 'active':''" @click='tps(ins)'>
+                <div class="sort_item_border">
+					{{i}}
+					<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon"><polygon  points="0,3 10,3 5,8" :style="{display:ins==indexs?'none':'block'}"></polygon></svg>
+					<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" versixon="1.1" class="sort_icon"><polygon style=" fill: #3190e8;" points="0,3 10,3 5,8" :style="{display:ins==indexs?'block':'none'}"></polygon></svg>
+                </div>
+            </div>
+            <div v-show='cli_ty' class="sh">
+			<div class="sort_itli" :class="indexs == 0? 'ste':''">
+				<ul>
+					<li v-for="(i,indexss) in gains" :key="indexss">
+						{{i.name}}
+					</li>
+				</ul>
 			</div>
+			<div class="sort_itli" :class="indexs == 1? 'ste':''">
+				2
+			</div>
+			<div class="sort_itli" :class="indexs == 2? 'ste':''">
+				3
+			</div>
+		</div>
+        </div>
+		
+		
         <div class="item">
-				<div class="hd">
-					<span class="glyphicon glyphicon-home" style="color:#ccc"></span>
-					<span style="color:#999">附近商家</span>
-				</div>
 				<div class="lists" v-for="(i,index) in store" :key="index">
 					<section>
 						<img :src="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" />
@@ -76,51 +74,54 @@
 					</hgroup>
 				</div>
 			</div>
-			<bottoms :take="'foodList'" :order="'order'" :my="'login'" :search="'search'" :nums="0"></bottoms>
     </div>
 </template>
 <script>
-import bottoms from '../components/bottom'
-import headers from '../components/HelloWorld'
-import Swiper from 'swiper';
-import 'swiper/dist/css/swiper.min.css';
+    import bottoms from '../components/bottom'
+    import headers from '../components/HelloWorld'
 export default{
-    data(){
-        return {
-            da1: '',
-            da2: '',
-            store: '',
-        }
-    },
     components:{headers,bottoms},
-    created(){
-        
+    data(){
+        return{
+             store: '',
+			 titl:'',
+			 indexs:'',
+             geohash:'',
+             con_ar:['排序','筛选'],
+			 cli_ty:false,
+			 latitude:'',
+			 longitude:'',
+			 gains:''
+        }	
     },
-    mounted() {
-          this.gain()
-			new Swiper('.swiper-container', {
-				loop: false,
-				// 如果需要分页器
-				pagination: {
-					el: '.swiper-pagination',
-				},
-            })
-		},
+    created(){
+        this.rest();
+        
+        this.titl = this.$route.query.title
+        this.geohash = this.$route.query.geohash
+		this.con_ar.unshift(this.titl)
+		this.gain()
+		
+    },
     methods:{
-        gain() {
-				this.$http.get('https://elm.cangdu.org/v2/index_entry', ).then((data) => {
-                    var dat = data.data;
-                    console.log(data)
-					this.da1 = dat.splice(0, 8);
-
-				})
-				this.$http.get('https://elm.cangdu.org/v2/index_entry', ).then((data) => {
-					var dat = data.data;
-					this.da2 = dat.splice(8, 16);
-				}),
-				this.rest()
-            },
-			rest() {
+		//获取所有商铺分类列表
+		gain(){
+			this.geohash.split(',')
+			this.latitude = this.geohash.split(',')[0]
+			this.longitude = this.geohash.split(',')[1]
+			console.log(this.longitude)
+			this.$http.get('http://elm.cangdu.org/shopping/v2/restaurant/category',{
+				params:{
+					latitude:this.latitude,
+					longitude:this.longitude
+				}
+			}).then((data)=>{
+				console.log(data)
+				this.gains = data.data
+			})
+		},
+		//获取商铺列表
+        rest() {
 				// var ars = this.go.split(',');ars[0], ars[1]
 				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
 					params: {
@@ -128,41 +129,79 @@ export default{
 						longitude:121.510013
 					}
 				}).then((data) => {
-					console.log(data);
 					this.store = data.data;
 				})
 
+			},
+			tps(ins){
+				
+				if(this.cli_ty && ins==this.indexs){
+					this.cli_ty = false
+				}else{
+					this.cli_ty = true
+				}
+				this.indexs =ins
+				console.log(this.cli_ty)
 			},
     }
 }
 </script>
 <style scoped>
-    .swip{
-        margin-top:50px;
-    }
-    .swiper-container {
+
+.sh{
+	width:100%;
+	background: white;
+	z-index: 22;
+	width:100%;
+	position: fixed;
+	top:86px;
+	transition: 4s
+}
+.sh .sort_itli{
+	display: none;
+	transition:1s;
+	opacity:0;
+}
+.sh div:first-of-type li{
+	line-height: 30px;
+}
+.sh .ste{
+	opacity:1;
+	display:block
+}
+.sort_container .active{
+	color: #3190e8;
+}
+.sort_item .sort_item_border{
+    height: .5rem;
+    border-right: .025rem solid #e4e4e4;
+    margin-top: 10px;
+}
+   
+.sort_item{
+    font-size: .36rem;
+    color: #444;
+    width: 33.3%;
+    height: 1.2rem;
+    text-align: center;
+}
+.sort_container{
+        background-color: #fff;
+        /* border-bottom: .025rem solid #f1f1f1; */
+        position: fixed;
+        top: 1.3rem;
+        right: 0;
         width: 100%;
-        height: 210px;
-    }  
-    .msite_nav{
-        margin-top:50px;
-		background:white;
-    }
-    .list{
-		width: 25%;
-		box-sizing: border-box;
-		float: left;
-		/*height: 120px;*/
-		padding: 10px 0;
-		text-align: center;
-		color:#666;
-		font-size: 14px;
-		min-height: 50px;
-	}
+        display: -ms-flexbox;
+        display: flex;
+        z-index: 13;
+        box-sizing: border-box;
+}
 	.item {
 		border-top: 20px solid #f5f5f5;
 		overflow: hidden;
-		background: white
+		background: white;
+		margin-top:70px;
 	}
 	.hd {
 		height: 30px;
@@ -279,7 +318,7 @@ export default{
 	.shop_p2 p:last-of-type span:last-of-type{
 		color: #3190e8;
 	}
-	.hello{
+    	.hello{
 		z-index:4;
 	}
 	a{

@@ -24,7 +24,7 @@
                 </ul>
             </div>
         </div>
-        <bottoms :take="'foodList'" :order="''" :my="''" :search="'search'"></bottoms>
+        <bottoms :take="'foodList'" :order="'order'" :my="'login'" :search="'search'" :nums="1"></bottoms>
     </div>
 </template>
 <script>

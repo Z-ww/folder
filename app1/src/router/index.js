@@ -42,6 +42,16 @@ export default new Router({
       path: '/shop',
       name: 'shop',
       component: () => import(/* webpackChunkName: "shop" */ '../views/shop.vue')
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: () => import(/* webpackChunkName: "shop" */ '../views/G-order.vue')
+    },
+    {
+      path: '/food',
+      name: 'food',
+      component: () => import(/* webpackChunkName: "shop" */ '../views/G-food.vue')
     }
   ]
 })
