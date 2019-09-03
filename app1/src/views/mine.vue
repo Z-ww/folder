@@ -7,7 +7,12 @@
           <img src="" alt="">
         </div>
         <div class="right clearf">
-          <div class="l">
+          <div v-if="this.$store.state.user.userName" class="l">
+            <router-link to="/userinfo">
+              <h2>{{this.$store.state.user.userName}}</h2>
+            </router-link>
+          </div>
+          <div class="l" v-else>
             <h2>登录/注册</h2>
             <p>暂无绑定手机号</p>
           </div>
@@ -21,7 +26,7 @@
         <div>
           <span style="color: orange;">0.00</span>元
         </div>
-       <router-link to='/balance'><p>我的余额</p></router-link> 
+       <router-link to='/balance'><p>我的余额</p></router-link>
       </div>
       <div class="balance">
         <div>
@@ -42,7 +47,7 @@
 				<li>积分商城<span>></span></li>
 				<li>饿了么会员卡<span>></span></li>
 				<router-link to='/fuwu'><li>服务中心<span>></span></li></router-link>
-				<li>下载饿了么App<span>></span></li>
+				<router-link to='/load'><li>下载饿了么App<span>></span></li></router-link>
 			</div>
   </div>
 
@@ -50,7 +55,10 @@
 
 <script>
     export default {
-        name: "mine"
+        name: "mine",
+        created() {
+            console.log(this.$store)
+        }
     }
 </script>
 
@@ -103,7 +111,7 @@
 
   .money {
     width: 100%;
-    background-color: #fff;
+    background-color: #fff !important;
     margin-bottom: 10px;
   }
 

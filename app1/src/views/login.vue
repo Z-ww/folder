@@ -24,9 +24,6 @@
       <p>注册过的用户可凭账号密码登录</p>
       <button @click="login()">登录</button>
     </div>
-    {{user}}
-    {{pass}}
-    {{code}}
   </div>
 </template>
 
@@ -44,38 +41,51 @@
                 img: '',//验证码图片
                 user: '',//账号
                 pass: '',//密码
-                code: '',//验证码 
+                code: '',//验证码
+                list_user: '',//登录成功后个人的信息
             }
         },
         methods: {
             login() {
-                this.$http.post('https://elm.cangdu.org/v2/login', {
+                this.axios.post('https://elm.cangdu.org/v2/login', {
                     username: this.user,
                     password: this.pass,
                     captcha_code: this.code,
                 }, {
                     emulateJSON: true
-                }).then((data) => {
-                    console.log(data)
+                }).then((response)=>{
+                    this.list_user=response.data
+                   if(response.data.status==0){
+                       alert(response.data.message)
+                       this.code_img()
+                   }else{
+                       this.Usercity()
+                       this.$router.push('/mine')
+                   }
+                }).catch((response)=>{
+                    console.log(response)
                 })
             },
             code_img() {
-                this.$http.post('https://elm.cangdu.org/v1/captchas', {
+                this.axios.post('https://elm.cangdu.org/v1/captchas', {
                     emulateJSON: true
-                }).then((data) => {
-                    this.img = data.body.code
+                }).then((response)=>{
+                    this.img=response.data.code
+                }).catch((response)=>{
                 })
-            }
+            },
+            Usercity(){
+                this.$store.commit('setUsercity',this.list_user.city)
+                this.$store.commit('setUserimg',this.list_user.avatar)
+                this.$store.commit('setUserid',this.list_user.id)
+                this.$store.commit('setUsername',this.list_user.username)
+                this.$store.commit('setUserpoint',this.list_user.point)
+                this.$store.commit('setUsergift',this.list_user.gift_amount)
+            },
+
         },
         created() {
-            this.$http.post('https://elm.cangdu.org/v1/captchas', {
-                emulateJSON: true
-            }).then((data) => {
-                this.img = data.body.code
-            })
-            this.$http.get('https://elm.cangdu.org/v1/user').then((data) => {
-                console.log(data)
-            })
+           this.code_img()
         }
     }
 </script>
