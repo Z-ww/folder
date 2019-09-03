@@ -11,12 +11,6 @@ export default new Router({
 			component: Home
 		},
 		{
-			path: '/mine',
-			name: 'mine',
-			component: () =>
-				import( /* webpackChunkName: "mine" */ '../views/mine.vue')
-		},
-		{
 			path: '/login',
 			name: 'login',
 			component: () =>
@@ -185,7 +179,8 @@ export default new Router({
 			name: 'svip',
 			component: () =>
 				import( /* webpackChunkName: "svip" */ '../views/svip.vue')
-		}, {
+		},
+		{
 			path: '/resetPass',
 			name: 'resetPass',
 			component: () =>
