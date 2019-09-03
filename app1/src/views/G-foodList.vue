@@ -112,7 +112,6 @@ export default{
                     var dat = data.data;
                     console.log(data)
 					this.da1 = dat.splice(0, 8);
-
 				})
 				this.$http.get('https://elm.cangdu.org/v2/index_entry', ).then((data) => {
 					var dat = data.data;
@@ -131,7 +130,6 @@ export default{
 					console.log(data);
 					this.store = data.data;
 				})
-
 			},
     }
 }
