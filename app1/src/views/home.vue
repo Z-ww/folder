@@ -2,7 +2,7 @@
 
 <template>
 	<div class="home">
-		<hello-world left="elm.en" rightto="login" right="登陆 | 注册"></hello-world>
+		<hello-world left="elm.en" rightto="login" right="登陆 | 注册" ></hello-world>
 		<div style="height: 50px"></div>
 		<div>
 			<div class="z-left">当前定位城市：<span>定位不标准时，请在城市列表中选择</span></div>

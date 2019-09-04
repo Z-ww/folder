@@ -37,7 +37,8 @@
     width: 90%;
     height: 30px;
     outline: none;
-    border: solid 1px #ededed;
+    border: solid 1px #
+    deded;
     border-radius: 3px;
     padding-left: 10px;
     box-sizing: border-box;

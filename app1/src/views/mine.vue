@@ -24,28 +24,30 @@
 		<!--    余额积分-->
 		<div class="money clearf">
 			<div class="balance">
-				<div>
-					<span style="color: orange;font-weight: bold;">0.00</span>元
-				</div>
 				<router-link to='/balance'>
+				<div>
+					<span style="color: orange;font-weight: bold;font-size: 24px;">0.00 </span>元
+				</div>
 					<p style="color: black;">我的余额</p>
 				</router-link>
 			</div>
 			<div class="balance">
-				<div>
-					<span style="color: red;font-weight: bold;">0</span>个
+				<router-link to='/'>
+					<div>
+					<span style="color: red;font-weight: bold;font-size: 24px;">0 </span>个
 				</div>
-				<p>我的优惠</p>
+				<p style="color: black;">我的优惠</p>
+				</router-link>
 			</div>
-			<!--<router-link to=''>-->
 			<div class="balance">
-				<div>
-					<span style="color: green;font-weight: bold;">0.00</span>分
+				<router-link to='/integral'>
+					<div>
+					<span style="color: green;font-weight: bold;font-size: 24px;">0.00 </span>分
 				</div>
 
-				<p>我的积分</p>
+				<p style="color: black;">我的积分</p>
+				</router-link>
 			</div>
-			<!--</router-link>-->
 
 		</div>
 		<div id="list">
