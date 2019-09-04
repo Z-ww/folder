@@ -47,7 +47,7 @@
 						</header>
 						<div class="shop_p1">
 								<ul>
-										<el-rate
+										<el-rate 
   v-model="i.rating"
   disabled
   show-score

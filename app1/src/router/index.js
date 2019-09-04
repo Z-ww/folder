@@ -24,6 +24,28 @@ export default new Router({
 			component: () =>
 				import( /* webpackChunkName: "city" */ '../views/city.vue')
 		},
+		{
+			path: '/order',
+			name: 'order',
+			component: () =>
+				import( /* webpackChunkName: "city" */ '../views/G-order.vue')
+		},
+		{
+			path: '/foodList',
+			name: 'foodList',
+			component:foodList
+		},
+		{
+			path: '/search',
+			name: 'search',
+			component:search
+		},
+		{
+			path: '/food',
+			name: 'food',
+			component: () =>
+				import( /* webpackChunkName: "mine" */ '../views/G-food.vue')
+		},
 		//我的
 		{
 			path: '/mine',

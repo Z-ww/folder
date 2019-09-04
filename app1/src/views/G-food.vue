@@ -329,11 +329,4 @@ export default{
 	a{
 		color: #666;
 	}
-.el-rate__icon{
-  font-size: 0.1rem;
-  margin-right: 0.16rem;
-  color: #C0C4CC;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
 </style>
