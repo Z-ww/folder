@@ -2,11 +2,17 @@
 	<div class="fuwu_box">
 		<div class="header">
 			<router-link to='/mine'><span><</span></router-link>
-			<span @click="btn()">服务中心</span>
+			<span>服务中心</span>
 		</div>
 		<div class="z_box">
-			<span>在线客服</span>
-			<span>在线客服</span>
+			<div>
+				<i class="icon iconfont icon-kefu" style="font-size: 22px;color: palevioletred;"></i>
+				在线客服
+			</div>
+			<div>
+				<i class="icon iconfont icon-dianhua" style="font-size: 22px;color: green;"></i>
+				在线客服
+			</div>
 		</div>
 		<div>
 			<ul>
@@ -43,6 +49,7 @@
 		},
 		created(){
 			this.btn()
+			console.log(this.dat)
 		},
 		methods:{
 			btn(){
@@ -51,8 +58,8 @@
 						
 					}
 				}).then((data)=>{
-					this.dat=data.body
-					console.log(data.body)
+					this.dat=data.data
+					console.log(data)
 					
 				})
 			}
@@ -63,7 +70,8 @@
 </script>
 <style scoped>
 	.fuwu_box{
-		width: 370px;
+		width: 375px;
+		background: white;
 	}
 	.header{
 		height: 40px;
@@ -85,31 +93,34 @@
 		width: 375px;
 		height: 60px;
 		position: relative;
+		font-size: 22px;
+		margin-bottom: 10px;
 	}
-	.z_box span:nth-of-type(1){
-		font-size: 16px;
-		padding-left: 60px;
-		padding-top: 20px;
-		display: inline-block;
-		top: 20px;
+	.z_box div{
+		width: 50%;
+		float: left;
+		text-align: center;
+		line-height: 80px;
+		box-sizing: border-box;
+		border-bottom: 1px solid #CCCCCC;
 	}
-	.z_box span:nth-of-type(2){
-		font-size: 16px;
-		padding-left: 90px;
-		display: inline-block;
+	.z_box div:first-of-type{
+		border-right: 1px solid #CCCCCC;
 	}
 	ul{
 		margin-top: 20px;
 	}
 	ul li{
 		padding-left: 10px;
-		height: 40px;
+		height: 50px;
 		font-size: 16px;
 		list-style: none;
 		position: relative;
-		line-height: 40px;
+		line-height: 50px;
+		color: #2C3E50;
 		border-bottom: 1px solid #DEDEDE;
 	}
+	
 	ul li span{
 		position: absolute;
 		right: 10px;

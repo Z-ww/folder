@@ -191,6 +191,33 @@ export default new Router({
 			name: 'userinfo',
 			component: () =>
 				import( /* webpackChunkName: "userinfo" */ '../views/userinfo.vue')
-		}
+		},
+		//积分
+		{
+			path: '/jife',
+			name: 'jife',
+			component: () =>
+				import( /* webpackChunkName: "jife" */ '../views/jife.vue')
+		},
+		{
+			path: '/load',
+			name: 'load',
+			component: () =>
+				import( /* webpackChunkName: "load" */ '../views/load.vue')
+		},
+		//积分商城
+		{
+			path: '/integral',
+			name: 'integral',
+			component: () =>
+				import( /* webpackChunkName: "integral" */ '../views/integral.vue')
+		},
+		{
+			path: '/integral2',
+			name: 'integral2',
+			component: () =>
+				import( /* webpackChunkName: "integral" */ '../views/integral2.vue')
+		},
+		
 	]
 })

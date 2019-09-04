@@ -5,7 +5,7 @@
       <div>{{name}}</div>
       <router-link :to="{name:rightto}"><p class="ps">{{right}}</p></router-link>
   </div>
-</template>
+</template> 
 
 <script>
 export default {

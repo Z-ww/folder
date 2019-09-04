@@ -7,6 +7,7 @@ import 'lib-flexible/flexible'
 import store from './store/store.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import icon from './store/icon/iconfont.css'
 Vue.use(VueAxios,axios,VueResource);
 
 import './assets/font/iconfont.css'
