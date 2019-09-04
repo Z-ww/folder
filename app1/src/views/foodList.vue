@@ -30,7 +30,7 @@
       </div>
 
 
-      <router-link :to="{name: 'shop'}" v-for="i in store">
+      <router-link :to="{name:'shop'}" v-for="i in store">
         <div class="lists">
           <section>
             <img :src="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img"/>
@@ -98,6 +98,7 @@
         components: {headers, butTom},
         created() {
             this.dizi()
+            console.log( this.$route.params.latitude,this.$route.params.longitude)
         },
         mounted() {
             this.gain()
@@ -122,8 +123,8 @@
                     this.rest()
             },
             rest() {
-                // var ars = this.go.split(',');ars[0], ars[1]
-                this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
+            	if(this.list_city.name){
+            		this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
                     params: {
                         latitude: this.$route.params.latitude,
                         longitude: this.$route.params.longitude
@@ -131,6 +132,18 @@
                 }).then((data) => {
                     this.store = data.data;
                 })
+            	}else{
+            		this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
+                    params: {
+                        latitude: 46.02117,
+                        longitude:  128.87285
+                    }
+                }).then((data) => {
+                    this.store = data.data;
+                })
+            	}
+                
+                
             },
             dizi(){
                 this.$http.get('https://elm.cangdu.org/v2/pois/'+this.$route.params.latitude+','+this.$route.params.longitude,{
@@ -172,7 +185,7 @@
   }
 
   .item {
-    border-top: 20px solid #f5f5f5;
+    border-top: 20px solid #f1f1f1;
     overflow: hidden;
   }
 

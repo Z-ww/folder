@@ -16,6 +16,13 @@ export default new Router({
 			component: () =>
 				import( /* webpackChunkName: "login" */ '../views/login.vue')
 		},
+		//店铺
+		{
+			path: '/shop',
+			name: 'shop',
+			component: () =>
+				import( /* webpackChunkName: "shop" */ '../views/shop.vue')
+		},
 		{
 			path: '/city',
 			name: 'city',
