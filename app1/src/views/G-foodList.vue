@@ -47,12 +47,15 @@
 						</header>
 						<div class="shop_p1">
 								<ul>
-									<li>
-										<span v-for='i in 5' :key="i"></span>
+										<el-rate
+  v-model="i.rating"
+  disabled
+  show-score
+  text-color="#ff9900"
+  score-template="{value}"></el-rate>
 										
-									</li>
 								</ul>
-								<span class="shop_p1s">{{i.rating}}</span>
+
 								<span>
 									月售{{i.recent_order_num}}单
 								</span>

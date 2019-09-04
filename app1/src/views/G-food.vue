@@ -45,12 +45,16 @@
 						</header>
 						<div class="shop_p1">
 								<ul>
-									<li>
 										<!-- <span v-for='i in 5' class="glyphicon glyphicon-star" :key="i"></span> -->
-										
-									</li>
+										<el-rate
+  v-model="i.rating"
+  disabled
+  show-score
+  text-color="#ff9900"
+  score-template="{value}">
+</el-rate>
 								</ul>
-								<span class="shop_p1s">{{i.rating}}</span>
+								<!-- <span class="shop_p1s">{{i.rating}}</span> -->
 								<span>
 									月售{{i.recent_order_num}}单
 								</span>
@@ -78,7 +82,7 @@
 </template>
 <script>
     import bottoms from '../components/bottom'
-    import headers from '../components/HelloWorld'
+	import headers from '../components/HelloWorld'
 export default{
     components:{headers,bottoms},
     data(){
@@ -91,7 +95,7 @@ export default{
 			 cli_ty:false,
 			 latitude:'',
 			 longitude:'',
-			 gains:''
+			 gains:'',
         }	
     },
     created(){
@@ -104,6 +108,7 @@ export default{
 		
     },
     methods:{
+	
 		//获取所有商铺分类列表
 		gain(){
 			this.geohash.split(',')
@@ -324,4 +329,11 @@ export default{
 	a{
 		color: #666;
 	}
+.el-rate__icon{
+  font-size: 0.1rem;
+  margin-right: 0.16rem;
+  color: #C0C4CC;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
 </style>
