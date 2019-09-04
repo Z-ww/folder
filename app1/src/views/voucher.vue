@@ -52,8 +52,7 @@
 						
 					}
 				}).then((data)=>{
-					this.dat=data.body
-					console.log(data.body)
+					this.dat=data.data
 					
 				})
 			}

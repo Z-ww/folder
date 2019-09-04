@@ -1,13 +1,19 @@
 <template>
   <div class="login">
-    <hello-world left="<" leftto="mine" name="密码登录"></hello-world>
+    <hello-world left="<" leftto="mine" name="重置密码"></hello-world>
     <div class="kong"></div>
     <div class="from">
       <div class="ipt clearf">
         <input type="text" placeholder="账号" v-model="user">
       </div>
       <div class="ipt clearf">
-        <input type="text" placeholder="密码" v-model="pass">
+        <input type="text" placeholder="旧密码" v-model="oldpass">
+      </div>
+      <div class="ipt clearf">
+        <input type="text" placeholder="请输入新密码" v-model="newpass">
+      </div>
+      <div class="ipt clearf">
+        <input type="text" placeholder="请确认密码" v-model="pass">
       </div>
       <div class="ipt clearf">
         <input type="text" placeholder="验证码" v-model="code">
@@ -20,57 +26,50 @@
       </div>
     </div>
     <div class="loginbtn">
-      <p>温馨提示： 未注册过的账号，登录时将自动注册</p>
-      <p>注册过的用户可凭账号密码登录</p>
-      <button @click="login()">登录</button>
+      <button @click="reset()">确认修改</button>
     </div>
-<<<<<<< HEAD
-    {{user}}
-    {{pass}}
-    {{code}}
-        <bottoms :take="'foodList'" :order="'order'" :my="'login'" :search="'search'"></bottoms>
-=======
->>>>>>> 211424f7ae7d1ed5085595c9afc392b34e00acec
   </div>
 </template>
 
 <script>
 
     import HelloWorld from '@/components/HelloWorld.vue'
-    import bottoms from '@/components/bottom.vue'
 
     export default {
         name: "login",
         components: {
-            HelloWorld,
-            bottoms
+            HelloWorld
         },
         data() {
             return {
                 img: '',//验证码图片
                 user: '',//账号
-                pass: '',//密码
+                oldpass: '',//旧密码
+                newpass: '',//新密码
+                pass: '',//新密码
                 code: '',//验证码
                 list_user: '',//登录成功后个人的信息
             }
         },
         methods: {
-            login() {
-                this.axios.post('https://elm.cangdu.org/v2/login', {
-                    username: this.user,
-                    password: this.pass,
-                    captcha_code: this.code,
+            reset() {
+                this.axios.post('https://elm.cangdu.org/v2/changepassword', {
+                    username : this.user,// 用户名
+                    oldpassWord : this.oldpass,//旧密码
+                    newpassword: this.newpass,//新密码
+                    confirmpassword: this.pass,//确认密码
+                    captcha_code: this.code,//验证码
                 }, {
                     emulateJSON: true
                 }).then((response)=>{
                     this.list_user=response.data
-                   if(response.data.status==0){
-                       alert(response.data.message)
-                       this.code_img()
-                   }else{
-                       this.Usercity()
-                       this.$router.push('/mine')
-                   }
+                    if(response.data.status==0){
+                        alert(response.data.success)
+                        this.code_img()
+                    }else{
+                        alert(response.data.message)
+                        this.$router.push('/userinfo')
+                    }
                 }).catch((response)=>{
                     console.log(response)
                 })
@@ -83,18 +82,10 @@
                 }).catch((response)=>{
                 })
             },
-            Usercity(){
-                this.$store.commit('setUsercity',this.list_user.city)
-                this.$store.commit('setUserimg',this.list_user.avatar)
-                this.$store.commit('setUserid',this.list_user.id)
-                this.$store.commit('setUsername',this.list_user.username)
-                this.$store.commit('setUserpoint',this.list_user.point)
-                this.$store.commit('setUsergift',this.list_user.gift_amount)
-            },
 
         },
         created() {
-           this.code_img()
+            this.code_img()
         }
     }
 </script>
@@ -128,10 +119,7 @@
   }
 
   .loginbtn {
-    padding: 0 24px;
-    font-size: 12px;
-    line-height: 32px;
-    color: #fe1111;
+    padding: 30px 24px;
   }
 
   .loginbtn button {
@@ -147,7 +135,7 @@
   .auth {
     position: absolute;
     right: 40px;
-    top: 170px;
+    top: 270px;
   }
 
   .auth > div {
