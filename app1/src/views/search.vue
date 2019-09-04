@@ -1,13 +1,13 @@
 <template>
 	<div class="search_box">
-		<div class="header">
-			<span><</span>
-			<span>搜索</span>
+		<div style="height: 50px;">
+			<headers left="<" leftto="mine" name="搜索"></headers>
 		</div>
 		<div>
 			<input type="text"  placeholder="请输入商家或美食名称"/>
 			<button @click="btn()">提交</button>
 		</div>
+		<bottom></bottom>
 	</div>
 </template>
 <style scoped>
@@ -53,7 +53,13 @@
 	}
 </style>
 <script>
+	import headers from "../components/HelloWorld";
+ import bottom from "../components/bottom";
 	export default{
+		components: {
+            headers,
+            bottom,
+        },
 		name:"search",
 		data(){
 			return{

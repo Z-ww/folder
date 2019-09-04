@@ -2,7 +2,7 @@
     <div class="btm">
         <router-link v-for="o,i in str" :key="i+o" :to = '{name:num[i]}' >
              <div @click="is = i">
-                <p :class="['iconfont',arr[i],is!=i?'':'active']"></p>
+                <p :class="['iconfont',arr[i],is!=i?'':'active']" style="font-weight: bold;"></p>
                 <p>{{o}}</p>
             </div>
         </router-link>
@@ -31,7 +31,7 @@ export default {
         is: 0,
         arr:['icon-eleme','icon-zhinanzhen','icon-dingdan','icon-wode'],
         str:['外卖','搜索','订单','我的'],
-        num:[this.take,this.search,this.order,this.my]
+        num:['foodList','search',this.order,'mine']
     }
   },
   created() {
@@ -50,6 +50,7 @@ export default {
     position: fixed;
     border: 1px solid #eee;
     bottom: 0;
+    background: white;
 }
 .btm div{
     width: 25%;
