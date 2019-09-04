@@ -19,18 +19,22 @@
         </div>
         <ul class="clearf">
           <li v-for="a in i.foods" class="list_food clearf">
-            <div class="food_left">
-              <div class="food_img">
-                <img :src="img_url+a.image_path" alt="">
-              </div>
+            <router-link :to="{name: 'details',params: {list: a}}">
+              <div class="food_left">
+                <div class="food_img">
+                  <img :src="img_url+a.image_path" alt="">
+                </div>
 
-            </div>
-            <div class="food_right">
+              </div>
+               </router-link>
+              <div class="food_right">
                 <h3>{{a.name}}</h3>
                 <p>{{a.description}}</p>
                 <span>{{a.tips}}</span>
-            </div>
+              </div>
+           
             <div class="gou">
+              {{a.specfoods[0].price}}起
               <shop-ping></shop-ping>
             </div>
 

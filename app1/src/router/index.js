@@ -75,6 +75,20 @@ export default new Router({
 			component: () =>
 				import( /* webpackChunkName: "problem" */ '../views/problem.vue')
 		},
+		//菜详情
+		{
+			path: '/details',
+			name: 'details',
+			component: () =>
+				import( /* webpackChunkName: "details" */ '../views/details.vue')
+		},
+		//在线支付
+		{
+			path: '/timeDown',
+			name: 'timeDown',
+			component: () =>
+				import( /* webpackChunkName: "timeDown" */ '../views/timeDown.vue')
+		},
 		//余额问题
 		{
 			path: '/problem2',
