@@ -1,16 +1,18 @@
 <template>
     <div class="city">
-      <hello-world left="<" name="北京" right="切换城市"></hello-world>
+      <hello-world left="<" leftto="home" :name="list_city.name" right="切换城市" rightto="home"></hello-world>
       <div style="height: 50px;"></div>
       <div class="search">
-        <input type="text" placeholder="输入学校、商务楼、地址">
-        <button>提交</button>
+        <input type="text" placeholder="输入学校、商务楼、地址" v-model="site">
+        <button @click="btn()">提交</button>
       </div>
       <ul class="list">
-        <li>
-          <h4>小吃一条街</h4>
-          <p>北京市丰台区开阳路</p>
-        </li>
+        <router-link :to="{name:'foodList',params: {latitude:i.latitude,longitude: i.longitude}}" v-for="(i,index) in list_site" :key='index'>
+          <li>
+            <h4>{{i.name}}</h4>
+            <p>{{i.address}}</p>
+          </li>
+        </router-link>
       </ul>
     </div>
 </template>
@@ -22,7 +24,38 @@
         components: {
             HelloWorld
         },
+        data(){
+            return{
+                list_city: '',//根据id获取到城市信息
+                site: '',//搜索地址
+                list_site: [],//搜索到的信息
+            }
+        },
+        methods: {
+            city(){
+                this.$http.get('https://elm.cangdu.org/v1/cities/'+this.$route.query.id,{
+                    params: {
 
+                    }
+                }).then((data)=>{
+                    this.list_city=data.data
+                })
+            },
+            btn(){
+                this.$http.get('https://elm.cangdu.org/v1/pois',{
+                    params: {
+                        city_id: this.$route.query.id,
+                        keyword: this.site,
+                    }
+                }).then((data)=>{
+                    this.list_site=data.data
+                    console.log(data)
+                })
+            }
+        },
+        created() {
+            this.city()
+        }
     }
 </script>
 
@@ -37,8 +70,7 @@
     width: 90%;
     height: 30px;
     outline: none;
-    border: solid 1px #
-    deded;
+    border: solid 1px #ededed;
     border-radius: 3px;
     padding-left: 10px;
     box-sizing: border-box;

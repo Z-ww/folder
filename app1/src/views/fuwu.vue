@@ -1,8 +1,7 @@
 <template>
 	<div class="fuwu_box">
-		<div class="header">
-			<router-link to='/mine'><span><</span></router-link>
-			<span>服务中心</span>
+		<div style="height: 50px;">
+			<headers left="<" leftto="mine" name="服务中心"></headers>
 		</div>
 		<div class="z_box">
 			<div>
@@ -40,7 +39,12 @@
 	
 </template>
 <script>
+	import headers from "../components/HelloWorld";
+ 
 	export default{
+		components: {
+            headers
+        },
 		name:'fuwu',
 		data(){
 			return{

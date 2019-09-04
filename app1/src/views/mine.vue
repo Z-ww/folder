@@ -60,10 +60,14 @@
 					<span>&gt;</span>
 				</li>
 			</router-link>
-
+<router-link to='/benefit'>
 			<li>
-				<i class="icon iconfont icon-wangguan" style="color: yellow;font-size: 22px;"></i> 饿了么会员卡
-				<span>&gt;</span></li>
+				
+					<i class="icon iconfont icon-wangguan" style="color: yellow;font-size: 22px;"></i> 饿了么会员卡
+				<span>&gt;</span>
+				
+				
+			</li></router-link>
 			<router-link to='/fuwu'>	
 				<li>
 					<p style="width: 20px;height: 20px; background: deepskyblue;float: left;margin: 5px;margin-top:14px;"></p>
@@ -75,13 +79,20 @@
 					<span>&gt;</span></li>
 			</router-link>
 		</div>
+		
+		
+		<bottom></bottom>
 	</div>
 
 </template>
 
 <script>
+	import bottom from "../components/bottom";
 	export default {
 		name: "mine",
+		components: {
+            bottom
+        },
 		created() {
 			console.log(this.$store)
 		}

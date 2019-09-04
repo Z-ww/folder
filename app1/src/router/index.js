@@ -31,16 +31,6 @@ export default new Router({
 				import( /* webpackChunkName: "city" */ '../views/G-order.vue')
 		},
 		{
-			path: '/foodList',
-			name: 'foodList',
-			component:foodList
-		},
-		{
-			path: '/search',
-			name: 'search',
-			component:search
-		},
-		{
 			path: '/food',
 			name: 'food',
 			component: () =>
@@ -75,7 +65,7 @@ export default new Router({
 			path: '/search',
 			name: 'search',
 			component: () =>
-				import( /* webpackChunkName: "balance" */ '../views/search.vue')
+				import( /* webpackChunkName: "balance" */ '../views/G-search.vue')
 
 		},
 		//服务中心
@@ -190,6 +180,34 @@ export default new Router({
 			component: () =>
 				import( /* webpackChunkName: "point" */ '../views/point.vue')
 		},
+		//会员中心
+		{
+			path: '/benefit',
+			name: 'benefit',
+			component: () =>
+				import( /* webpackChunkName: "benefit" */ '../views/benefit.vue')
+		},
+		//会员说明
+		{
+			path: '/vipDescription',
+			name: 'vipDescription',
+			component: () =>
+				import( /* webpackChunkName: "vipDescription" */ '../views/vipDescription.vue')
+		},
+		//购买记录
+		{
+			path: '/invoiceRecord',
+			name: 'invoiceRecord',
+			component: () =>
+				import( /* webpackChunkName: "invoiceRecord" */ '../views/invoiceRecord.vue')
+		},
+		//兑换会员
+		{
+			path: '/userCart',
+			name: 'userCart',
+			component: () =>
+				import( /* webpackChunkName: "userCart" */ '../views/userCart.vue')
+		},
 		//用户等级说明
 		{
 			path: '/user',
@@ -241,6 +259,13 @@ export default new Router({
 			name: 'integral2',
 			component: () =>
 				import( /* webpackChunkName: "integral" */ '../views/integral2.vue')
+		},
+		//具体城市
+		{
+			path: '/foodList',
+			name: 'foodList',
+			component: () =>
+				import( /* webpackChunkName: "foodList" */ '../views/G-foodList.vue')
 		},
 		
 	]

@@ -1,5 +1,6 @@
 <template>
 	<div class="box">
+		<headers left="<" leftto="mine" name="积分商城"></headers>
 		<router-link to='/mine'><h3>请重新进入</h3></router-link>
 		<p>请返回后重新进入积分商城~</p>
 		<img src="//yun.duiba.com.cn/webapp/img/retrylogin.png" />
@@ -34,7 +35,11 @@
 	}
 </style>
 <script>
+	import headers from "../components/HelloWorld";
 	export default{
 		name:'jife',
+		components: {
+            headers
+        },
 	}
 </script>

@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div>
            <headers :left="'111'" :leftto="'search'" name='222' right='登陆/注册' :rightto="'login'">
 
@@ -60,7 +61,7 @@
 									月售{{i.recent_order_num}}单
 								</span>
 								<h5>
-									<span>{{i.delivery_mode.text}}</span>
+									<!-- <span>{{i.delivery_mode.text}}</span> -->
 									<span>{{i.supports[1].name}}</span>
 								</h5>
 						</div>
@@ -81,6 +82,7 @@
 			</div>
 			<bottoms :take="'foodList'" :order="'order'" :my="'login'" :search="'search'" :nums="0"></bottoms>
     </div>
+  </div>
 </template>
 <script>
 import bottoms from '../components/bottom'
@@ -108,34 +110,43 @@ export default{
 					el: '.swiper-pagination',
 				},
             })
-		},
-    methods:{
-        gain() {
-				this.$http.get('https://elm.cangdu.org/v2/index_entry', ).then((data) => {
+        },
+        methods: {
+            gain() {
+                this.$http.get('https://elm.cangdu.org/v2/index_entry',).then((data) => {
                     var dat = data.data;
-                    console.log(data)
-					this.da1 = dat.splice(0, 8);
-				})
-				this.$http.get('https://elm.cangdu.org/v2/index_entry', ).then((data) => {
-					var dat = data.data;
-					this.da2 = dat.splice(8, 16);
-				}),
-				this.rest()
+                    this.da1 = dat.splice(0, 8);
+                })
+                this.$http.get('https://elm.cangdu.org/v2/index_entry',).then((data) => {
+                    var dat = data.data;
+                    this.da2 = dat.splice(8, 16);
+                }),
+                    this.rest()
             },
-			rest() {
-				// var ars = this.go.split(',');ars[0], ars[1]
-				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
-					params: {
-						latitude: 31.234035,
-						longitude:121.510013
-					}
-				}).then((data) => {
-					console.log(data);
-					this.store = data.data;
-				})
-			},
+            rest() {
+                // var ars = this.go.split(',');ars[0], ars[1]
+                this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
+                    params: {
+                        latitude: this.$route.params.latitude,
+                        longitude: this.$route.params.longitude
+                    }
+                }).then((data) => {
+					console.log(data)
+                    this.store = data.data;
+                })
+            },
+            dizi(){
+                this.$http.get('https://elm.cangdu.org/v2/pois/'+this.$route.params.latitude+','+this.$route.params.longitude,{
+                    params: {
+
+                    }
+                }).then((data)=>{
+                    this.list_city=data.data
+                    console.log(data)
+                })
+            }
+        }
     }
-}
 </script>
 <style scoped>
     .swip{
