@@ -192,7 +192,7 @@ export default new Router({
 			path: '/userCart',
 			name: 'userCart',
 			component: () =>
-				import( /* webpackChunkName: "userCart" */ '../views/useCart.vue')
+				import( /* webpackChunkName: "userCart" */ '../views/userCart.vue')
 		},
 		//用户等级说明
 		{
