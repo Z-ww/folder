@@ -95,8 +95,8 @@ export default{
         }	
     },
     created(){
-        this.rest();
-        
+		this.rest();
+		
         this.titl = this.$route.query.title
         this.geohash = this.$route.query.geohash
 		this.con_ar.unshift(this.titl)

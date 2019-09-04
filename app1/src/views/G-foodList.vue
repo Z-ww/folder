@@ -16,7 +16,7 @@
 						</div>
 						<div class="swiper-slide">
 							<div class="list" v-for='(i,index) in da2' :key="index">
-								<router-link :to="{path:'/food'}">
+								<router-link :to="{path:'/food',query:{geohash:'31.234035,121.510013',title:i.title,restaurant_category_id:i.restaurant_category_id}}">
 									<img :src="'https://fuss10.elemecdn.com'+i.image_url" alt="" />
 									<p>{{i.title}}</p>
 								</router-link>
@@ -48,7 +48,7 @@
 						<div class="shop_p1">
 								<ul>
 									<li>
-										<!-- <span v-for='i in 5' class="glyphicon glyphicon-star" :key="i"></span> -->
+										<span v-for='i in 5' :key="i"></span>
 										
 									</li>
 								</ul>
@@ -99,7 +99,7 @@ export default{
     mounted() {
           this.gain()
 			new Swiper('.swiper-container', {
-				loop: false,
+				loop: true,
 				// 如果需要分页器
 				pagination: {
 					el: '.swiper-pagination',
