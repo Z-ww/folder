@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/home'
-import foodList from '../views/G-foodList'
-import search from '../views/G-search'
 
 Vue.use(Router)
 
@@ -17,6 +15,13 @@ export default new Router({
 			name: 'login',
 			component: () =>
 				import( /* webpackChunkName: "login" */ '../views/login.vue')
+		},
+		//店铺
+		{
+			path: '/shop',
+			name: 'shop',
+			component: () =>
+				import( /* webpackChunkName: "shop" */ '../views/shop.vue')
 		},
 		{
 			path: '/city',
@@ -81,6 +86,20 @@ export default new Router({
 			name: 'problem',
 			component: () =>
 				import( /* webpackChunkName: "problem" */ '../views/problem.vue')
+		},
+		//菜详情
+		{
+			path: '/details',
+			name: 'details',
+			component: () =>
+				import( /* webpackChunkName: "details" */ '../views/details.vue')
+		},
+		//在线支付
+		{
+			path: '/timeDown',
+			name: 'timeDown',
+			component: () =>
+				import( /* webpackChunkName: "timeDown" */ '../views/timeDown.vue')
 		},
 		//余额问题
 		{

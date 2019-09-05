@@ -102,7 +102,8 @@ export default{
         console.log(this.$route)
     },
     mounted() {
-          this.gain()
+		  this.gain()
+		  this.rest()
 			new Swiper('.swiper-container', {
 				loop: true,
 				// 如果需要分页器
@@ -120,7 +121,8 @@ export default{
                 this.$http.get('https://elm.cangdu.org/v2/index_entry',).then((data) => {
                     var dat = data.data;
                     this.da2 = dat.splice(8, 16);
-                })
+				})
+				
             },
             rest() {
                 // var ars = this.go.split(',');ars[0], ars[1]

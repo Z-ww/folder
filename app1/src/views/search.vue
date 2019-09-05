@@ -43,13 +43,17 @@
 		background: #f2f2f2;
 		margin: 10px;
 		outline: none;
+		border: none;
+		border: 1px solid #CCCCCC;
 		border-radius:5px ;
+		text-indent: 10px;
 	}
 	div button{
 		background: #3190e8;
 		width: 50px;
 		height: 30px;
 		color: #fff;
+		border: none;
 	}
 </style>
 <script>
