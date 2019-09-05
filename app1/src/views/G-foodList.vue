@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-           <headers :left="'111'" :leftto="'search'" name='222' right='登陆/注册' :rightto="'login'">
+           <headers :left="'111'" :leftto="'search'" :name='list_city' right='登陆/注册' :rightto="'login'">
 
 		   </headers>
       <div class="msite_nav">
@@ -94,7 +94,8 @@ export default{
         return {
             da1: '',
             da2: '',
-            store: '',
+			store: '',
+			list_city:''
         }
     },
     components:{headers,bottoms},
@@ -110,7 +111,9 @@ export default{
 				pagination: {
 					el: '.swiper-pagination',
 				},
-            })
+			}),
+			this.dizi()
+			console.log(this.list_city)
         },
         methods: {
             gain() {
@@ -128,21 +131,21 @@ export default{
                 // var ars = this.go.split(',');ars[0], ars[1]
                 this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
                     params: {
-                        latitude: this.$route.params.latitude,
-                        longitude: this.$route.params.longitude
+                        latitude: this.$route.query.latitude,
+                        longitude: this.$route.query.longitude
                     }
                 }).then((data) => {
-					console.log(data)
                     this.store = data.data;
                 })
             },
+			//根据经纬度详细定位
             dizi(){
-                this.$http.get('https://elm.cangdu.org/v2/pois/'+this.$route.params.latitude+','+this.$route.params.longitude,{
+                this.$http.get('https://elm.cangdu.org/v2/pois/'+this.$route.query.latitude+','+this.$route.query.longitude,{
                     params: {
 
                     }
                 }).then((data)=>{
-                    this.list_city=data.data
+                    this.list_city=data.data.name
                     console.log(data)
                 })
             }

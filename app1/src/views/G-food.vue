@@ -5,7 +5,7 @@
 			<loading v-if="isLoading"></loading>
 			</transition>
 		</div>
-        <headers :left="'<'" :name="titl"></headers>
+        <headers :left="'<'" :name="titl" :leftto="'foodList'"></headers>
 		<down :latitude="con_ar[0]" :longitude="con_ar[1]" @id ="ids" @data = "datas"></down>
         <div class="item">
 				<div class="lists" v-for="(i,index) in store" :key="index">
