@@ -49,7 +49,7 @@
 						</ul>
 						<p class="psfs">商家属性（可以多选）</p>
 						<ul class="filter_ul" style="padding-bottom: 20px;">
-							<li class="filter_li" v-for="i,index in data" @click="types(index+1)">
+							<li class="filter_li" v-for="(i,index) in data" :key="index+i" @click="types(index+1)">
 								<span class="filter_icon iconfont">{{type[index+1]?'&#xe63e;':i.icon_name}}</span>
 								<p :style="{'color':type[index+1]?'blue':''}">{{i.name}}</p>
 							</li>
@@ -160,7 +160,9 @@ export default {
 	.down{
 		width: 100%;
 		border-bottom: 2px solid #f1f1f1;
-		position: relative;
+		position: fixed;
+		top:50px;
+		z-index: 10;
 		background: #fff;
 	}
 	.sort{
@@ -186,8 +188,8 @@ export default {
 		position: absolute;
 		left: 0;
 		z-index: -1;
-		transform: translateY(0px)
-	
+		transform: translateY(0px);
+		background:white
 	}
 	/* 筛选 */
 	.psfs{
@@ -363,10 +365,11 @@ export default {
 	/* 右盒子 */
 	.category_right{
 		width: 44%;
-		height: auto;
+		height: 450px;
 		float: left;
 		padding-left: 20px;
 		overflow-y:scroll;
+		background: white
 	}
 	.category_right p{
 		width: 100%;

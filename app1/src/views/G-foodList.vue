@@ -99,7 +99,7 @@ export default{
     },
     components:{headers,bottoms},
     created(){
-        
+        console.log(this.$route)
     },
     mounted() {
           this.gain()
@@ -120,8 +120,7 @@ export default{
                 this.$http.get('https://elm.cangdu.org/v2/index_entry',).then((data) => {
                     var dat = data.data;
                     this.da2 = dat.splice(8, 16);
-                }),
-                    this.rest()
+                })
             },
             rest() {
                 // var ars = this.go.split(',');ars[0], ars[1]

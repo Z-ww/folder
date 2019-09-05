@@ -1,33 +1,12 @@
 <template>
     <div>
-		
-        <headers :left="'<'" :name="titl" :leftto="'foodList'"></headers>
-        <div class="sort_container">
-            <div class="sort_item" v-for="(i,ins) in con_ar" :key="ins" :class="ins == indexs ? 'active':''" @click='tps(ins)'>
-                <div class="sort_item_border">
-					{{i}}
-					<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon"><polygon  points="0,3 10,3 5,8" :style="{display:ins==indexs?'none':'block'}"></polygon></svg>
-					<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" versixon="1.1" class="sort_icon"><polygon style=" fill: #3190e8;" points="0,3 10,3 5,8" :style="{display:ins==indexs?'block':'none'}"></polygon></svg>
-                </div>
-            </div>
-            <div v-show='cli_ty' class="sh">
-			<div class="sort_itli" :class="indexs == 0? 'ste':''">
-				<ul>
-					<li v-for="(i,indexss) in gains" :key="indexss">
-						{{i.name}}
-					</li>
-				</ul>
-			</div>
-			<div class="sort_itli" :class="indexs == 1? 'ste':''">
-				2
-			</div>
-			<div class="sort_itli" :class="indexs == 2? 'ste':''">
-				3
-			</div>
+		 <div>
+			<transition name="fade">
+			<loading v-if="isLoading"></loading>
+			</transition>
 		</div>
-        </div>
-		
-		
+        <headers :left="'<'" :name="titl"></headers>
+		<down :latitude="con_ar[0]" :longitude="con_ar[1]" @id ="ids" @data = "datas"></down>
         <div class="item">
 				<div class="lists" v-for="(i,index) in store" :key="index">
 					<section>
@@ -59,8 +38,8 @@
 									月售{{i.recent_order_num}}单
 								</span>
 								<h5>
-									<span>{{i.delivery_mode.text}}</span>
-									<span>{{i.supports[1].name}}</span>
+									<!-- <span>{{i.delivery_mode.text}}</span> -->
+									<!-- <span>{{i.supports[1].name}}</span> -->
 								</h5>
 						</div>
 						<div class="shop_p2">
@@ -82,9 +61,11 @@
 </template>
 <script>
     import bottoms from '../components/bottom'
+	import down from '../components/down.vue'
+	import Loading from '@/components/loading'
 	import headers from '../components/HelloWorld'
 export default{
-    components:{headers,bottoms},
+    components:{headers,bottoms,down,Loading},
     data(){
         return{
              store: '',
@@ -96,57 +77,58 @@ export default{
 			 latitude:'',
 			 longitude:'',
 			 gains:'',
+			 idss:'',
+			 dataa:0,
+			 tt:'',
+			 isLoading: false
         }	
     },
     created(){
 		this.rest();
-		
         this.titl = this.$route.query.title
         this.geohash = this.$route.query.geohash
 		this.con_ar.unshift(this.titl)
-		this.gain()
-		
     },
     methods:{
-	
-		//获取所有商铺分类列表
-		gain(){
-			this.geohash.split(',')
-			this.latitude = this.geohash.split(',')[0]
-			this.longitude = this.geohash.split(',')[1]
-			console.log(this.longitude)
-			this.$http.get('http://elm.cangdu.org/shopping/v2/restaurant/category',{
-				params:{
-					latitude:this.latitude,
-					longitude:this.longitude
-				}
-			}).then((data)=>{
-				console.log(data)
-				this.gains = data.data
-			})
+		bbb(){
+			console.log(1)
+			history.back()
+		},
+		ids(id){
+			this.idss = id
+			this.rest(this.idss,this.dataa)
+			this.isLoading = true
+		},
+		datas(data){
+			this.dataa = data
+			this.rest(this.idss,this.dataa)
+
+			this.isLoading = true
 		},
 		//获取商铺列表
-        rest() {
-				// var ars = this.go.split(',');ars[0], ars[1]
+        rest(id,data) {
+			
 				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
 					params: {
 						latitude: 31.234035,
-						longitude:121.510013
+						longitude:121.510013,
+						restaurant_category_ids: [id],
+						order_by:data
 					}
 				}).then((data) => {
+					console.log(data)
 					this.store = data.data;
+					this.isLoading = false
 				})
 
 			},
 			tps(ins){
-				
 				if(this.cli_ty && ins==this.indexs){
 					this.cli_ty = false
 				}else{
 					this.cli_ty = true
 				}
 				this.indexs =ins
-				console.log(this.cli_ty)
 			},
     }
 }
@@ -206,7 +188,7 @@ export default{
 		border-top: 20px solid #f5f5f5;
 		overflow: hidden;
 		background: white;
-		margin-top:70px;
+		margin-top:80px;
 	}
 	.hd {
 		height: 30px;
