@@ -2,7 +2,7 @@
   <div>
     <div>
            <headers :left="'111'" :leftto="'search'" :name='list_city' right='登陆/注册' :rightto="'login'">
-
+		   
 		   </headers>
       <div class="msite_nav">
 				<div class="swiper-container">
