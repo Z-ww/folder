@@ -7,7 +7,7 @@
         <button @click="btn()">提交</button>
       </div>
       <ul class="list">
-        <router-link :to="{name:'foodList',params: {latitude:i.latitude,longitude: i.longitude}}" v-for="i in list_site">
+        <router-link :to="{name:'foodList',params: {latitude:i.latitude,longitude: i.longitude}}"  :key='index' v-for="i,index in list_site">
           <li>
             <h4>{{i.name}}</h4>
             <p>{{i.address}}</p>

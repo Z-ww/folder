@@ -8,13 +8,15 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <div class="list" v-for='i in da1'>
+           <router-link to='/foods' v-for='i,index in da1' :key='index'>
+           	 <div class="list"  >
               <img :src="'https://fuss10.elemecdn.com'+i.image_url" alt=""/>
               <p>{{i.title}}</p>
             </div>
+           </router-link>
           </div>
           <div class="swiper-slide">
-            <div class="list" v-for='i in da2'>
+            <div class="list" v-for='i,index in da2' :key='index'>
               <img :src="'https://fuss10.elemecdn.com'+i.image_url" alt=""/>
               <p>{{i.title}}</p>
             </div>
@@ -30,25 +32,25 @@
       </div>
 
 
-      <router-link :to="{name:'shop'}" v-for="i in store">
+      <router-link :to="{name:'shop'}" v-for="i,index in store" :key='index'> 
         <div class="lists">
           <section>
             <img :src="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img"/>
           </section>
           <hgroup class="shop_right">
             <header class="shop_detail_header">
-              <h4 class="shop_title ellipsis premium">{{i.name}}</h4>
+              <h4 class="shop_title ellipsis premium" style="color: black;">{{i.name}}</h4>
               <ul class="shop_detail_ul">
-                <li class="supports">保</li>
-                <li class="supports">准</li>
-                <li class="supports">票</li>
+                <li class="supports">保&ensp;</li>
+                <li class="supports">准&ensp;</li>
+                <li class="supports">票  </li>
               </ul>
 
             </header>
             <div class="shop_p1">
               <ul>
                 <li>
-                  <span v-for='i in 5' class="glyphicon glyphicon-star"></span>
+                  <span v-for='i in 5' class="glyphicon glyphicon-star" :key='i'></span>
 
                 </li>
               </ul>
