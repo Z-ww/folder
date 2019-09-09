@@ -1,9 +1,15 @@
 <template>
   <div>
     <div>
+		<div>
+			<transition name="fade">
+			<loading v-if="isLoading"></loading>
+			</transition>
+		</div>
            <headers :left="'111'" :leftto="'search'" :name='list_city' right='登陆/注册' :rightto="'login'">
 		   
 		   </headers>
+		  
       <div class="msite_nav">
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
@@ -87,6 +93,7 @@
 <script>
 import bottoms from '../components/bottom'
 import headers from '../components/HelloWorld'
+import Loading from '@/components/loading'
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.min.css';
 export default{
@@ -95,18 +102,21 @@ export default{
             da1: '',
             da2: '',
 			store: '',
-			list_city:''
+			list_city:'',
+			 isLoading: true
         }
     },
-    components:{headers,bottoms},
+    components:{headers,bottoms,Loading},
     created(){
-        console.log(this.$route)
+		console.log(this.$route)
+		this.gain()
+		this.rest()
     },
     mounted() {
-		  this.gain()
-		  this.rest()
+		  
+			
 			new Swiper('.swiper-container', {
-				loop: true,
+				loop: false,
 				// 如果需要分页器
 				pagination: {
 					el: '.swiper-pagination',
@@ -122,6 +132,7 @@ export default{
                     this.da1 = dat.splice(0, 8);
                 })
                 this.$http.get('https://elm.cangdu.org/v2/index_entry',).then((data) => {
+					console.log(data)
                     var dat = data.data;
                     this.da2 = dat.splice(8, 16);
 				})
@@ -135,7 +146,8 @@ export default{
                         longitude: this.$route.query.longitude
                     }
                 }).then((data) => {
-                    this.store = data.data;
+					this.store = data.data;
+					this.isLoading = false
                 })
             },
 			//根据经纬度详细定位
