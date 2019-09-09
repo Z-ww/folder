@@ -1,8 +1,7 @@
 <template>
 	<div class="box">
-		<div class="header">
-			<span><</span>
-			<span>兑换会员</span>
+		<div style="height: 50px;">
+			 <headers name="兑换会员" left="<" leftto="home"></headers>
 		</div>
 		<div class="con">
 			<p>成功兑换后将关联到当前帐号：777777 </p>
@@ -72,7 +71,11 @@
 	}
 </style>
 <script>
+	  import headers from "../components/HelloWorld";
 	export default{
-		name:'userCart',
+		name:'userCart', 
+		components: {
+            headers
+        },
 	}
 </script>

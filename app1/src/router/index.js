@@ -101,6 +101,13 @@ export default new Router({
 			component: () =>
 				import( /* webpackChunkName: "timeDown" */ '../views/timeDown.vue')
 		},
+		//分类 
+		{
+			path: '/foods',
+			name: 'foods',
+			component: () =>
+				import( /* webpackChunkName: "timeDown" */ '../views/G-food.vue')
+		},
 		//余额问题
 		{
 			path: '/problem2',
