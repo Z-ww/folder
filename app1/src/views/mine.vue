@@ -25,50 +25,51 @@
 		<div class="money clearf">
 			<div class="balance">
 				<router-link to='/balance'>
-				<div>
-					<span style="color: orange;font-weight: bold;font-size: 24px;">0.00 </span>元
-				</div>
+					<div>
+						<span style="color: orange;font-weight: bold;font-size: 24px;">0.00 </span>元
+					</div>
 					<p style="color: black;">我的余额</p>
 				</router-link>
 			</div>
 			<div class="balance">
 				<router-link to='/'>
 					<div>
-					<span style="color: red;font-weight: bold;font-size: 24px;">0 </span>个
-				</div>
-				<p style="color: black;">我的优惠</p>
+						<span style="color: red;font-weight: bold;font-size: 24px;">0 </span>个
+					</div>
+					<p style="color: black;">我的优惠</p>
 				</router-link>
 			</div>
 			<div class="balance">
 				<router-link to='/integral'>
 					<div>
-					<span style="color: green;font-weight: bold;font-size: 24px;">0.00 </span>分
-				</div>
+						<span style="color: green;font-weight: bold;font-size: 24px;">0.00 </span>分
+					</div>
 
-				<p style="color: black;">我的积分</p>
+					<p style="color: black;">我的积分</p>
 				</router-link>
 			</div>
 
 		</div>
 		<div id="list">
 			<li>
-				<i class="icon iconfont icon-dingdan"></i>
-				<i class="iconfont icon-icon-order"></i>我的订单<span>&gt;</span></li>
+				<i class="icon iconfont icon-dingdan"></i> 我的订单
+				<span>&gt;</span>
+			</li>
 			<router-link to='/jife'>
 				<li>
 					<i class="icon iconfont icon-gouwu" style="color: red;font-size: 22px;"></i> 积分商城
 					<span>&gt;</span>
 				</li>
 			</router-link>
-<router-link to='/benefit'>
-			<li>
-				
+			<router-link to='/benefit'>
+				<li>
+
 					<i class="icon iconfont icon-wangguan" style="color: yellow;font-size: 22px;"></i> 饿了么会员卡
-				<span>&gt;</span>
-				
-				
-			</li></router-link>
-			<router-link to='/fuwu'>	
+					<span>&gt;</span>
+
+				</li>
+			</router-link>
+			<router-link to='/fuwu'>
 				<li>
 					<p style="width: 20px;height: 20px; background: deepskyblue;float: left;margin: 5px;margin-top:14px;"></p>
 					服务中心<span>&gt;</span></li>
@@ -79,8 +80,7 @@
 					<span>&gt;</span></li>
 			</router-link>
 		</div>
-		
-		
+
 		<bottom></bottom>
 	</div>
 
@@ -91,8 +91,8 @@
 	export default {
 		name: "mine",
 		components: {
-            bottom
-        },
+			bottom
+		},
 		created() {
 			console.log(this.$store)
 		}

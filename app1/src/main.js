@@ -12,6 +12,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(VueAxios,axios,VueResource);
 Vue.use(ElementUI)
 import './assets/font/iconfont.css'
+import './assets/font1/iconfont.css'
+//import './assets/font/iconfont.css'
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true;
 

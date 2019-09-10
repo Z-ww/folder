@@ -7,7 +7,8 @@
         <button @click="btn()">提交</button>
       </div>
       <ul class="list">
-        <router-link to="/foodList"  :key='index' v-for="(i,index) in list_site">
+        <router-link :to="{name:'foodList',query:{geohash:i.geohash}}"  :key='index' v-for="(i,index) in list_site">
+
           <li @click="btn2(index)">
             <h4>{{i.name}}</h4>
             <p>{{i.address}}</p>
