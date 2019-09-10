@@ -1,4 +1,4 @@
-<template>
+	<template>
 	<div class="search_box">
 		<div style="height: 50px;">
 			<headers left="<" leftto="mine" name="搜索"></headers>
@@ -76,6 +76,9 @@
 				.then((data=>{
 				var dat=data.data
 				console.log(dat)
+				if(dat.message=='经纬度参数错误'){
+					alert('参数错误')
+				}
 			}))
 		}
 	}

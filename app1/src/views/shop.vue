@@ -2,6 +2,7 @@
 <div class="shop">
   <header></header>
   <nav class="clearf">
+
     <div @click="type=true"><p :class="[type ? 'pin' : '']">商品</p></div>
     <div @click="type=false"><p :class="[!type ? 'pin' : '']">评价</p></div>
   </nav>
@@ -32,7 +33,7 @@
                 <p>{{a.description}}</p>
                 <span>{{a.tips}}</span>
               </div>
-           
+
             <div class="gou">
               {{a.specfoods[0].price}}起
               <shop-ping></shop-ping>
@@ -43,10 +44,25 @@
       </div>
     </div>
   </div>
+  <div class="comped">
+    <div class="com_left">
+      <div class="shop_img">
+        <img src="../assets/shop.png" alt="">
+      </div>
+      <div class="font">
+        <h3>￥0.00元</h3>
+        <p>配送费￥5元</p>
+      </div>
+    </div>
+    <div class="com_right">
+      还差￥20元起送
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
+
   import shopPing from '../components/shop.vue'
     export default {
         name: "shop",
@@ -98,10 +114,6 @@
     width: 100%;
     background-color: #fff;
     padding: 8px 0;
-    box-sizing: border-box;
-  }
-  nav .pin{
-    border-bottom: solid 2px #0169be;
   }
   nav>div{
     width: 50%;
@@ -129,6 +141,7 @@ nav>div p{
     list-style: none;
   }
   .list li{
+
     width: 100%;
     height: 60px;
     font-size: 14px;
@@ -215,5 +228,49 @@ nav>div p{
     width: 100%;
     text-align: right;
     display: inline-block;
+  }
+  .comped{
+    width: 100%;
+    height: 46px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+  .com_left{
+    width: 70%;
+    height: 46px;
+    background-color: #3d3c44;
+    float: left;
+  }
+  .com_right{
+    width: 30%;
+    height: 46px;
+    float: left;
+    background-color: #535258;
+    text-align: center;
+    color: #fff;
+    line-height: 46px;
+    font-weight: 600;
+  }
+  .shop_img{
+    width: 46px;
+    height: 46px;
+    background-color: blue;
+    border: solid 4px #424244;
+    border-radius: 50%;
+    position: absolute;
+    left: 20px;
+    top: -15px;
+    text-align: center;
+  }
+.shop_img img{
+  wdith: 30px;
+  height: 30px;
+  margin-top: 8px;
+}
+  .font{
+    margin-left: 80px;
+    color: #fff;
+    padding-top: 5px;
   }
 </style>
