@@ -6,7 +6,9 @@ export default{
         userGift:'',//优惠券
         userCity:'',//城市
         userImg:'',//头像
-        userBalance:''//余额
+        userBalance:'',//余额
+        latitude: '',//经度
+        longitude: '',//纬度
     },
     mutations:{
         setUserid(state,value){
@@ -30,6 +32,12 @@ export default{
         setUserblce(state,value){
             state.userBalance=value
         },
+      setlatitude(state,value){
+        state.latitude=value
+      },
+      setlongitude(state,value){
+        state. longitude=value
+      },
     },
 
 }

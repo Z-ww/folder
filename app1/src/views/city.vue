@@ -7,8 +7,8 @@
         <button @click="btn()">提交</button>
       </div>
       <ul class="list">
-        <router-link :to="{name:'foodList',query: {latitude:i.latitude,longitude: i.longitude}}" v-for="(i,index) in list_site" :key='index'>
-          <li>
+        <router-link to="/foodList"  :key='index' v-for="(i,index) in list_site">
+          <li @click="btn2(index)">
             <h4>{{i.name}}</h4>
             <p>{{i.address}}</p>
           </li>
@@ -51,6 +51,10 @@
                     this.list_site=data.data
                     console.log(data)
                 })
+            },
+            btn2(a){
+                this.$store.commit('setlatitude',this.list_site[a].latitude)
+                this.$store.commit('setlongitude',this.list_site[a].longitude)
             }
         },
         created() {
