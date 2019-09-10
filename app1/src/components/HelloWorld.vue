@@ -41,7 +41,7 @@ export default {
 .hello{
 	width:100%;
 	height:50px;
-	background-color:#3190e8;
+	background-color: #3190e8;
   overflow: hidden;
   position: fixed;
   top: 0;

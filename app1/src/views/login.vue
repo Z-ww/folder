@@ -24,17 +24,26 @@
       <p>注册过的用户可凭账号密码登录</p>
       <button @click="login()">登录</button>
     </div>
+<<<<<<< HEAD
+    {{user}}
+    {{pass}}
+    {{code}}
+        <bottoms :take="'foodList'" :order="'order'" :my="'login'" :search="'search'"></bottoms>
+=======
+>>>>>>> 211424f7ae7d1ed5085595c9afc392b34e00acec
   </div>
 </template>
 
 <script>
 
     import HelloWorld from '@/components/HelloWorld.vue'
+    import bottoms from '@/components/bottom.vue'
 
     export default {
         name: "login",
         components: {
-            HelloWorld
+            HelloWorld,
+            bottoms
         },
         data() {
             return {

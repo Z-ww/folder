@@ -24,6 +24,9 @@ export default {
       },
       my:{
         type:String
+      },
+      nums:{
+          type:Number
       }
   },
   data () {
@@ -35,6 +38,7 @@ export default {
     }
   },
   created() {
+      this.is = this.nums
       console.log(this.num)
   },
   
@@ -50,7 +54,7 @@ export default {
     position: fixed;
     border: 1px solid #eee;
     bottom: 0;
-    background: white;
+    background-color: #fff;
 }
 .btm div{
     width: 25%;

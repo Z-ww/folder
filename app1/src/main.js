@@ -7,9 +7,10 @@ import 'lib-flexible/flexible'
 import store from './store/store.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import icon from './store/icon/iconfont.css'
+import ElementUI from 'element-ui' 
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(VueAxios,axios,VueResource);
-
+Vue.use(ElementUI)
 import './assets/font/iconfont.css'
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true;

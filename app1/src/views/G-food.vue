@@ -107,7 +107,6 @@ export default{
 		},
 		//获取商铺列表
         rest(id,data) {
-			
 				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
 					params: {
 						latitude: 31.234035,

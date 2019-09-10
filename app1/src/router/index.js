@@ -29,6 +29,18 @@ export default new Router({
 			component: () =>
 				import( /* webpackChunkName: "city" */ '../views/city.vue')
 		},
+		{
+			path: '/order',
+			name: 'order',
+			component: () =>
+				import( /* webpackChunkName: "city" */ '../views/G-order.vue')
+		},
+		{
+			path: '/food',
+			name: 'food',
+			component: () =>
+				import( /* webpackChunkName: "mine" */ '../views/G-food.vue')
+		},
 		//我的
 		{
 			path: '/mine',
@@ -58,7 +70,7 @@ export default new Router({
 			path: '/search',
 			name: 'search',
 			component: () =>
-				import( /* webpackChunkName: "balance" */ '../views/search.vue')
+				import( /* webpackChunkName: "balance" */ '../views/G-search.vue')
 
 		},
 		//服务中心
@@ -279,7 +291,7 @@ export default new Router({
 			path: '/foodList',
 			name: 'foodList',
 			component: () =>
-				import( /* webpackChunkName: "foodList" */ '../views/foodList.vue')
+				import( /* webpackChunkName: "foodList" */ '../views/G-foodList.vue')
 		},
 		
 	]

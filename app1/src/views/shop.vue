@@ -43,6 +43,7 @@
         </ul>
       </div>
     </div>
+>>>>>>> 6ef482df16ac0df6dabf7d1a60730b21ae782bb7
   </div>
   <div class="comped">
     <div class="com_left">
