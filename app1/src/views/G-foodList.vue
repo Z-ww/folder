@@ -108,12 +108,13 @@
 			Loading
 		},
 		created() {
-			console.log(this.$route)
+			
 			this.gain()
 			this.rest()
 		},
 		mounted() {
-
+console.log(this.$store.state)
+			// console.log(this.$store.state.user.longitude)
 			new Swiper('.swiper-container', {
 					loop: false,
 					// 如果需要分页器
@@ -141,8 +142,8 @@
 				// var ars = this.go.split(',');ars[0], ars[1]
 				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
 					params: {
-						latitude: 39.8609,
-						longitude: 37031
+						latitude: this.$store.state.user.latitude,
+						longitude:  this.$store.state.user.longitude
 					}
 				}).then((data) => {
 					this.store = data.data;
