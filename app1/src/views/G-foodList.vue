@@ -38,8 +38,8 @@
 					<span class="glyphicon glyphicon-home" style="color:#ccc"></span>
 					<span style="color:#999">附近商家</span>
 				</div>
-				<router-link to='shop'>
-					<div class="lists" v-for="(i,index) in store" :key="index">
+				<router-link to='shop' v-for="(i,index) in store" :key="index">
+					<div class="lists">
 					<section>
 						<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" :key="i+index"/>
 					</section>

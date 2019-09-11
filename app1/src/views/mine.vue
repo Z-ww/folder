@@ -35,7 +35,7 @@
 				<router-link to='/'>
 					<div>
 						<span style="color: red;font-weight: bold;font-size: 24px;">0 </span>个
-					</div>
+					</div> 
 					<p style="color: black;">我的优惠</p>
 				</router-link>
 			</div>
