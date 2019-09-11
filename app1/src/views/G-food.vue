@@ -32,13 +32,15 @@
   score-template="{value}">
 </el-rate>
 								</ul>
+								
 								<span class="shop_p1s">{{i.rating}}</span>
 								<span>
 									月售{{i.recent_order_num}}单
 								</span>
 								<h5>
-									<span>{{i.delivery_mode.text}}</span>
-									<span>{{i.supports[1].name}}</span>
+									
+									<span>{{i.delivery_mode == undefined?'':i.delivery_mode.text}}</span>
+									<span>{{i.supports[1]== undefined?'':i.supports[1].name}}</span>
 								</h5>
 						</div>
 						<div class="shop_p2">
@@ -101,7 +103,6 @@ export default{
 		datas(data){
 			this.dataa = data
 			this.rest(this.idss,this.dataa)
-
 			this.isLoading = true
 		},
 		//获取商铺列表
