@@ -41,7 +41,7 @@
 				<router-link to='shop'>
 					<div class="lists" v-for="(i,index) in store" :key="index">
 					<section>
-						<img :src="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" />
+						<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" :key="i+index"/>
 					</section>
 					<hgroup class="shop_right">
 						<header class="shop_detail_header">
@@ -142,8 +142,8 @@ console.log(this.$store.state)
 				// var ars = this.go.split(',');ars[0], ars[1]
 				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
 					params: {
-						latitude: this.$store.state.user.latitude,
-						longitude:  this.$store.state.user.longitude
+						latitude: 31.28682,//	this.$store.state.user.latitude,
+						longitude:  47797//this.$store.state.user.longitude121
 					}
 				}).then((data) => {
 					this.store = data.data;

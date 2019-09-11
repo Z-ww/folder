@@ -13,9 +13,18 @@ Vue.use(VueAxios,axios,VueResource);
 Vue.use(ElementUI)
 import './assets/font/iconfont.css'
 import './assets/font1/iconfont.css'
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload)  
 //import './assets/font/iconfont.css'
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true;
+
+// Vue.use(VueLazyload, {
+//   preLoad: 1.3,
+//   error: 'dist/error.png',
+//   loading: 'dist/loading.gif',
+//   attempt: 1
+// })
 
 new Vue({
   el: '#app',

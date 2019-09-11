@@ -10,7 +10,7 @@
         <div class="item">
 				<div class="lists" v-for="(i,index) in store" :key="index">
 					<section>
-						<img :src="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" />
+						<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" :key="i+index"/>
 					</section>
 					<hgroup class="shop_right">
 						<header class="shop_detail_header">
