@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<div style="min-height: 50px;">
-			<headers left="<" leftto="mine" name="会员说明"></headers>
+			<headers left="<" leftto="benefit" name="会员说明"></headers>
 		</div>
 		<div class="con">
 			<p>

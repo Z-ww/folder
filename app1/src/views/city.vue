@@ -65,6 +65,9 @@
 </script>
 
 <style scoped>
+	h4{
+		color: black;
+	}
 .search{
   width: 100%;
   padding: 10px 0;

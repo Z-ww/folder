@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<div style="height: 50px;">
-			 <headers name="兑换会员" left="<" leftto="home"></headers>
+			 <headers name="兑换会员" left="<" leftto="benefit"></headers>
 		</div>
 		<div class="con">
 			<p>成功兑换后将关联到当前帐号：777777 </p>

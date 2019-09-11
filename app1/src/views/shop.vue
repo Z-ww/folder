@@ -1,6 +1,6 @@
 <template>
 <div class="shop">
-  <header></header>
+  <!--<header></header>-->
   <nav class="clearf">
 
     <div @click="type=true"><p :class="[type ? 'pin' : '']">商品</p></div>
@@ -35,7 +35,7 @@
               </div>
 
             <div class="gou">
-              {{a.specfoods[0].price}}起
+              <span style="font-size: 22px;color: dodgerblue;">{{a.specfoods[0].price}}</span> ¥ 起
               <shop-ping></shop-ping>
             </div>
 
