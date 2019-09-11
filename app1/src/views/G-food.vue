@@ -24,7 +24,6 @@
 						</header>
 						<div class="shop_p1">
 								<ul>
-										<!-- <span v-for='i in 5' class="glyphicon glyphicon-star" :key="i"></span> -->
 										<el-rate
   v-model="i.rating"
   disabled
@@ -33,13 +32,13 @@
   score-template="{value}">
 </el-rate>
 								</ul>
-								<!-- <span class="shop_p1s">{{i.rating}}</span> -->
+								<span class="shop_p1s">{{i.rating}}</span>
 								<span>
 									月售{{i.recent_order_num}}单
 								</span>
 								<h5>
-									<!-- <span>{{i.delivery_mode.text}}</span> -->
-									<!-- <span>{{i.supports[1].name}}</span> -->
+									<span>{{i.delivery_mode.text}}</span>
+									<span>{{i.supports[1].name}}</span>
 								</h5>
 						</div>
 						<div class="shop_p2">

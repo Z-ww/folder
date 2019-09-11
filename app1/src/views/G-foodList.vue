@@ -63,7 +63,7 @@
 									月售{{i.recent_order_num}}单
 								</span>
 							<h5>
-									<!-- <span>{{i.delivery_mode.text}}</span> -->
+									<span>{{i.delivery_mode.text}}</span>
 									<span>{{i.supports[1].name}}</span>
 								</h5>
 						</div>
