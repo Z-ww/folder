@@ -11,10 +11,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(VueAxios,axios,VueResource);
 Vue.use(ElementUI)
+// Vue.use($)
 import './assets/font/iconfont.css'
 import './assets/font1/iconfont.css'
 import VueLazyload from 'vue-lazyload'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
 //import './assets/font/iconfont.css'
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true;

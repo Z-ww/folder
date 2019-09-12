@@ -1,5 +1,30 @@
 <template>
-<div class="shop">
+<div class="shop" >
+  <!-- 跳出购物车 -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="shop_bottom" v-show="shopType">
+    <div class="shop_header">
+      <div class="Shop_cart">购物车<span @click="clears">清空</span></div>
+    </div>
+    <div class="shop_name">
+      <ul>
+        <li v-for="(value,key) in shop_storage" :key="key">
+          <p>
+           <span style="display:inline-block;width:200px;">{{value.name}}</span>
+            <span style="color: #f60;">￥{{value.price}}</span>
+            <span style="float:right">
+              {{value.num}}个数
+            </span>
+          </p>
+              </li>
+      </ul>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
   <transition name="fade">
 					<loading v-if="isLoading"></loading>
 	</transition>
@@ -36,8 +61,7 @@
               </div>
             <div class="gou">
               <span style="font-size: 22px;color: dodgerblue;">{{a.specfoods[0].price}}</span> ¥ 起
-            <shop-ping ></shop-ping>
-
+           <div @click='joins(a)'><shop-ping @num='join'></shop-ping></div>
             </div>
           </li>
         </ul>
@@ -46,11 +70,14 @@
   </div>
   <div class="comped">
     <div class="com_left">
-      <div class="shop_img">
-        <img src="../assets/shop.png" alt="">
+      <!-- <button style="width:100px;height:100px;"> -->
+      <div class="shop_img btn btn-primary" @click="shopType=true" type="button" data-toggle="modal" data-target=".bs-example-modal-sm">
+           <img src="../assets/shop.png" alt="">
+        <span>{{shop_nums}}</span>
       </div>
+      <!-- </button> -->
       <div class="font">
-        <h3>￥0.00元</h3>
+        <h3>￥{{Totalprice}}元</h3>
         <p>配送费￥5元</p>
       </div>
     </div>
@@ -58,6 +85,8 @@
       还差￥20元起送
     </div>
   </div>
+  
+  
 </div>
 </template>
 
@@ -79,33 +108,121 @@
                 listFood: '',//食品信息
                 img_url: '//elm.cangdu.org/img/',
                 isLoading: true,
+                //商品个数
+                nums:'',
+                //分类id
+                bigid:'',
+                //商品总价钱
+                Totalprice:0,
+                //显示隐藏购物车
+                shopType:false,
+                //存储加入购物车的商品
+                shop_storage:[],
+                //加入购物车的个数
+                shop_nums:0
+                
             }
         },
         created() {
-            this.food()
-            console.log(this.$store)
+           this.aaaaa()
         },
         methods:{
+          //
+          aaaaa(){
+             this.food()
+            if(localStorage.buyCart){
+                 var str =  localStorage.buyCart;
+              var arrs = JSON.parse(str);
+              console.log(arrs)
+              this.shop_storage = arrs
+              for(var key in arrs){
+                console.log(arrs[key])
+                this.shop_nums += arrs[key].num
+              }
+               for(var key in arrs){
+                    this.Totalprice += arrs[key].num*arrs[key].price
+                    this.shop_nums+=arrs[key].num
+                  }
+            }
+          },
+          //清空购物车
+          clears(){
+               localStorage.removeItem('buyCart')
+               this.shop_storage = '';
+               this.shop_nums=''
+          },
             food(){
                 this.$http.get('https://elm.cangdu.org/shopping/v2/menu',{
                     params: {
                         restaurant_id: 1
                     }
                 }).then((data)=>{
-                    console.log(data.data)
                     this.listFood=data.data
                     this.isLoading = false
                 })
             },
-            abc(a,b){
-              console.log(a,b)
-            }
+            // abc(a,b){
+            //   console.log(a,b)
+            // },
+            //记录商品个数
+            join(i){
+              this.nums = i
+            },
+            //将商品信息上传到localStorage里
+            //在这里计算总价钱
+            joins(a){
+               var buyCartss={
+                 [a.specfoods[0].item_id]:{
+                     id:a.specfoods[0].food_id,
+                          name:a.name,
+                          num:this.nums,
+                          price:a.specfoods[0].price,
+                          item:a.specfoods[0].item_id
+                 }
+                         
+                }
+                var typs = false;
+              if(localStorage.buyCart){
+                typs = true;
+              }
+              if(typs){
+                var str =  localStorage.buyCart;
+                var arrs = JSON.parse(str);
+                var itemid = a.specfoods[0].item_id
+                if(arrs[a.specfoods[0].item_id] != itemid){
+                  console.log('没重复，往里添加')
+                  arrs[itemid] = buyCartss[a.specfoods[0].item_id]
+                  localStorage.buyCart = JSON.stringify(arrs)
+                }else{
+                  console.log('重复了')
+                  console.log(buyCartss)
+                  localStorage.buyCart = JSON.stringify(buyCartss)
+                }
+                console.log(1111)
+              }else{
+                console.log(arrs)
+               localStorage.buyCart = JSON.stringify(buyCartss)
+                var str =  localStorage.buyCart;
+                var arrs = JSON.parse(str);
+              }
+               var nnn = 0
+              
+               this.shop_nums = 0;
+                  for(var key in arrs){
+                    nnn += arrs[key].num*arrs[key].price
+                    console.log(arrs[key].num)
+                    this.shop_nums+=arrs[key].num
+                  }
+                  this.Totalprice = nnn
+                  this.shop_storage = arrs
+                   console.log(this.shop_nums)
+                
+            },
         }
     }
 </script>
 
 <style scoped>
-
 .shop{
   width: 100%;
 }
@@ -265,7 +382,7 @@ nav>div p{
   .shop_img{
     width: 46px;
     height: 46px;
-    background-color: blue;
+    background-color: #3190e8;
     border: solid 4px #424244;
     border-radius: 50%;
     position: absolute;
@@ -273,14 +390,55 @@ nav>div p{
     top: -15px;
     text-align: center;
   }
+  .shop_img span{
+    position:absolute;
+    top:-4px;
+    right:-4px;
+    display: inline-block;
+    width:16px;
+    /* height:16px; */
+    line-height: .5rem;
+    border-radius: 50%;
+    background:red
+  }
 .shop_img img{
-  wdith: 30px;
+  width: 30px;
   height: 30px;
   margin-top: 8px;
+  position: absolute;
+  top: 0;
+  left: 4px;
 }
   .font{
     margin-left: 80px;
     color: #fff;
-    padding-top: 5px;
+  }
+  .shop_bottom{
+    min-height: 100px;
+    font-weight: 400;
+    background: #fff;
+  }
+  .shop_bottom .shop_header{
+    padding:10px 14px;
+    background-color: #eceff1;
+  }
+  .shop_bottom .Shop_cart{
+    /* margin:10px 14px; */
+    font-size: 18px;
+    color: #666;
+  
+  }
+  .shop_bottom .Shop_cart span{
+    font-size: 14px;
+    float:right
+  }
+  .shop_name{
+    font-size: 16px;
+    font-weight: bold;
+   
+        color: #666;
+  }
+  .shop_name li{
+ padding: 10px 10px;
   }
 </style>
