@@ -9,6 +9,7 @@ export default{
         userBalance:'',//余额
         latitude: '',//经度
         longitude: '',//纬度
+        totalPrice:''//购物车总价钱
     },
     mutations:{
         setUserid(state,value){
@@ -37,6 +38,9 @@ export default{
       },
       setlongitude(state,value){
         state. longitude=value
+      },
+      settotalPrice(state,value){
+        state.totalPrice=value
       },
     },
 

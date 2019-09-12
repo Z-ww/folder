@@ -1,31 +1,32 @@
 <template>
 <div class="shop">
+  <transition name="fade">
+					<loading v-if="isLoading"></loading>
+	</transition>
   <!--<header></header>-->
   <nav class="clearf">
-
     <div @click="type=true"><p :class="[type ? 'pin' : '']">商品</p></div>
     <div @click="type=false"><p :class="[!type ? 'pin' : '']">评价</p></div>
   </nav>
   <div class="shopping clearf">
     <div class="left">
       <ul class="list">
-        <li v-for="(i,index) in listFood" @click="num=index" :class="[num==index ? 'blue' : '']">{{i.name}}</li>
+        <li v-for="(i,index) in listFood" @click="num=index" :class="[num==index ? 'blue' : '']" :key="i+index">{{i.name}}</li>
       </ul>
     </div>
     <div class="right">
-      <div class="food" v-for="(i,index) in listFood" v-if="num==index">
+      <div class="food" v-for="(i,index) in listFood" v-if="num==index" :key="i+index">
         <div class="title clearf">
           <h3>{{i.name}}</h3>
           <span>{{i.description}}</span>
         </div>
         <ul class="clearf">
-          <li v-for="a in i.foods" class="list_food clearf">
+          <li v-for="(a,index) in i.foods" class="list_food clearf" :key="a+index">
             <router-link :to="{name: 'details',params: {list: a}}">
               <div class="food_left">
                 <div class="food_img">
                   <img :src="img_url+a.image_path" alt="">
                 </div>
-
               </div>
                </router-link>
               <div class="food_right">
@@ -33,17 +34,15 @@
                 <p>{{a.description}}</p>
                 <span>{{a.tips}}</span>
               </div>
-
             <div class="gou">
               <span style="font-size: 22px;color: dodgerblue;">{{a.specfoods[0].price}}</span> ¥ 起
-              <shop-ping></shop-ping>
-            </div>
+            <shop-ping ></shop-ping>
 
+            </div>
           </li>
         </ul>
       </div>
     </div>
-<!-->>>>>>> 6ef482df16ac0df6dabf7d1a60730b21ae782bb7-->
   </div>
   <div class="comped">
     <div class="com_left">
@@ -63,23 +62,28 @@
 </template>
 
 <script>
-
+	import Loading from '@/components/loading'
+//this.$store.commit('settotalPrice',参数)
   import shopPing from '../components/shop.vue'
     export default {
         name: "shop",
         components: {
             shopPing,
+            Loading,
+            price:''
         },
         data(){
             return{
                 type: true,
                 num: 2,
                 listFood: '',//食品信息
-                img_url: '//elm.cangdu.org/img/'
+                img_url: '//elm.cangdu.org/img/',
+                isLoading: true,
             }
         },
         created() {
             this.food()
+            console.log(this.$store)
         },
         methods:{
             food(){
@@ -90,13 +94,18 @@
                 }).then((data)=>{
                     console.log(data.data)
                     this.listFood=data.data
+                    this.isLoading = false
                 })
             },
+            abc(a,b){
+              console.log(a,b)
+            }
         }
     }
 </script>
 
 <style scoped>
+
 .shop{
   width: 100%;
 }
