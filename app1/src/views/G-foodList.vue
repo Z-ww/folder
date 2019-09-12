@@ -136,14 +136,13 @@ console.log(this.$store.state)
 					var dat = data.data;
 					this.da2 = dat.splice(8, 16);
 				})
-
 			},
 			rest() {
 				// var ars = this.go.split(',');ars[0], ars[1]
 				this.$http.get('https://elm.cangdu.org/shopping/restaurants', {
 					params: {
 						latitude: 31.28682,//	this.$store.state.user.latitude,
-						longitude:  47797//this.$store.state.user.longitude121
+						longitude:  47797//this.$store.state.user.longitude
 					}
 				}).then((data) => {
 					this.store = data.data;
@@ -152,10 +151,7 @@ console.log(this.$store.state)
 			},
 			//根据经纬度详细定位
 			dizi() {
-				this.$http.get('https://elm.cangdu.org/v2/pois/' + this.$route.query.latitude + ',' + this.$route.query.longitude, {
-					params: {
-
-					}
+				this.$http.get('https://elm.cangdu.org/v2/pois/'+this.$store.state.user.latitude+','+this.$store.state.user.longitude+'', {
 				}).then((data) => {
 					this.list_city = data.data.name
 					console.log(data)
