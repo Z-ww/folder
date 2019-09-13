@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+       
         <headerBar :left="'<'" :leftto="'foodList'" :name="'搜索'" ></headerBar>
         <div class="sear">
             <input type="text" placeholder="请输入商家或美食名称" v-model="txt" @input='inp($event)'>
@@ -14,9 +14,12 @@
 					<span style="color:#999">附近商家</span>
 				</div>
 				<div class="lists" v-for="(i,index) in store" :key="index">
-					<section>
-						<img :src="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" />
-					</section>
+					<router-link :to="{name:'shop',query:{id:i.id}}">
+						<section>
+							<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" />
+						</section>	
+					</router-link>
+					
 					<hgroup class="shop_right">
 						<header class="shop_detail_header">
 							<h4 class="shop_title ellipsis premium">{{i.name}}</h4>
@@ -29,8 +32,8 @@
 						<div class="shop_p1">
 								<ul>
 									<li>
-										<!-- <span v-for='i in 5' class="glyphicon glyphicon-star" :key="i"></span> -->
-										
+										<el-rate v-model="i.rating" disabled show-score text-color="#ff9900" score-template="{value}"></el-rate>
+
 									</li>
 								</ul>
 								<span class="shop_p1s">{{i.rating}}</span>
@@ -38,8 +41,8 @@
 									月售{{i.recent_order_num}}单
 								</span>
 								<h5>
-									<!-- <span>{{i.delivery_mode.text}}</span> -->
-									<span>{{i.supports[1].name}}</span>
+									<span>{{i.delivery_mode == undefined?'':i.delivery_mode.text}}</span>
+									<span>{{i.supports[1]== undefined?'':i.supports[1].name}}</span>
 								</h5>
 						</div>
 						<div class="shop_p2">
@@ -79,6 +82,7 @@
 <script>
 import bottoms from '../components/bottom'
 import headerBar from '../components/HelloWorld'
+
 export default{
     components:{headerBar,bottoms},
     data(){
@@ -88,7 +92,8 @@ export default{
             txts:'',
             ars:[],
             typess:'',
-            store:''
+            store:'',
+			isLoading: true
         }
     },
     created(){
@@ -116,6 +121,7 @@ export default{
             this.ars.unshift(this.txt)
             localStorage.searchHistory = JSON.stringify(this.ars)
             this.typess = true
+			// this.isLoading= false
         },
         inp(e){
             console.log(e.target.value);

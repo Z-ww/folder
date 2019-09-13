@@ -14,9 +14,11 @@
           <p>
            <span style="display:inline-block;width:200px;">{{value.name}}</span>
             <span style="color: #f60;">￥{{value.price}}</span>
+            <span style="float:right;margin-left:10px;" @click="shop_clear(value)">删除</span>
             <span style="float:right">
               {{value.num}}个数
             </span>
+            
           </p>
               </li>
       </ul>
@@ -61,7 +63,7 @@
               </div>
             <div class="gou">
               <span style="font-size: 22px;color: dodgerblue;">{{a.specfoods[0].price}}</span> ¥ 起
-           <div @click='joins(a)'><shop-ping @num='join'></shop-ping></div>
+           <div @click='joins(a)' style="float:left;margin-top:6px"><shop-ping @num='join'></shop-ping></div>
             </div>
           </li>
         </ul>
@@ -123,38 +125,58 @@
                 
             }
         },
+        watch:{
+            // Totalprice(a,b){
+            //   console.log(a,b)
+            // }
+        },
         created() {
            this.aaaaa()
+
         },
         methods:{
-          //
-          aaaaa(){
-             this.food()
-            if(localStorage.buyCart){
-                 var str =  localStorage.buyCart;
-              var arrs = JSON.parse(str);
-              console.log(arrs)
-              this.shop_storage = arrs
-              for(var key in arrs){
-                console.log(arrs[key])
-                this.shop_nums += arrs[key].num
+          //删除商品
+          shop_clear(i){
+            //删除某一个购物商品通过循环添加到另一个对象里
+            var obj={};
+            var local = JSON.parse(localStorage.buyCart);
+            for(var key in local){
+              if(key!=i.item){
+                obj[key] = local[key]
               }
+            }
+            console.log(obj)
+            localStorage.buyCart = JSON.stringify(obj)
+           this.aaaaa();
+           
+          },
+          aaaaa(){
+            this.food()
+            if(localStorage.buyCart){
+              this.shop_nums = 0;
+              this.Totalprice = 0;
+              var str =  localStorage.buyCart;
+              var arrs = JSON.parse(str);
+              this.shop_storage = arrs
                for(var key in arrs){
                     this.Totalprice += arrs[key].num*arrs[key].price
                     this.shop_nums+=arrs[key].num
                   }
             }
+            console.log(this.Totalprice)
           },
           //清空购物车
           clears(){
                localStorage.removeItem('buyCart')
                this.shop_storage = '';
-               this.shop_nums=''
+               this.shop_nums='';
+              this.Totalprice=0;
+
           },
             food(){
                 this.$http.get('https://elm.cangdu.org/shopping/v2/menu',{
                     params: {
-                        restaurant_id: 1
+                        restaurant_id: this.$route.query.id
                     }
                 }).then((data)=>{
                     this.listFood=data.data

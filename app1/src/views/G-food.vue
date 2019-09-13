@@ -9,9 +9,12 @@
 		<down :latitude="con_ar[0]" :longitude="con_ar[1]" @id ="ids" @data = "datas"></down>
         <div class="item">
 				<div class="lists" v-for="(i,index) in store" :key="index">
-					<section>
-						<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" :key="i+index"/>
-					</section>
+					<router-link :to="{name:'shop',query:{id:i.id}}">
+						<section>
+							<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" :key="i+index"/>
+						</section>
+					</router-link>
+					
 					<hgroup class="shop_right">
 						<header class="shop_detail_header">
 							<h4 class="shop_title ellipsis premium">{{i.name}}</h4>

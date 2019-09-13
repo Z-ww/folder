@@ -1,8 +1,8 @@
 <template>
     <div class="btm">
-        <router-link v-for="o,i in str" :key="i+o" :to = '{name:num[i]}' >
+        <router-link v-for="(o,i) in str" :key="i+o" :to = '{name:num[i]}' >
              <div @click="is = i">
-                <p :class="['iconfont',arr[i],is!=i?'':'active']" style="font-weight: bold;"></p>
+                <p :class="['iconfont',arr[i],is!=i?'':'active']" style="font-weight: bold;margin:0"></p>
                 <p>{{o}}</p>
             </div>
         </router-link>

@@ -38,7 +38,7 @@
 					<span class="glyphicon glyphicon-home" style="color:#ccc"></span>
 					<span style="color:#999">附近商家</span>
 				</div>
-				<router-link to='shop' v-for="(i,index) in store" :key="index">
+				<router-link :to="{name:'shop',query:{id:i.id}}" v-for="(i,index) in store" :key="index">
 					<div class="lists">
 					<section>
 						<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" :key="i+index"/>
@@ -56,7 +56,6 @@
 						<div class="shop_p1">
 							<ul>
 								<el-rate v-model="i.rating" disabled show-score text-color="#ff9900" score-template="{value}"></el-rate>
-
 							</ul>
 
 							<span>
@@ -159,7 +158,7 @@ console.log(this.$store.state)
 			}
 		}
 	}
-</script>
+</script>h4
 <style scoped>
 	.swip {
 		margin-top: 50px;
@@ -306,9 +305,7 @@ console.log(this.$store.state)
 		border: 2px solid #3190e8;
 	}
 	
-	.shop_p2 {
-		font-size: 10px;
-	}
+	
 	
 	.segmentation {
 		margin: 0 4px;
@@ -335,4 +332,5 @@ console.log(this.$store.state)
 	a {
 		color: #666;
 	}
+	
 </style>

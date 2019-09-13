@@ -56,4 +56,18 @@ export default {
   font-size:.2rem;
   margin:0 4px;
 }
+h4{
+		margin:0;
+	}
+	h5{
+		margin:0
+	}
+  h3{
+		margin:0
+	}
+  .shop_p2 {
+		font-size: 10px;
+		overflow: hidden;
+    	width: 100%;
+	}
 </style>
