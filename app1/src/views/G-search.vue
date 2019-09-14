@@ -1,6 +1,10 @@
 <template>
     <div>
-       
+       		<div>
+				<transition name="fade">
+					<loading v-if="isLoading"></loading>
+				</transition>
+			</div>
         <headerBar :left="'<'" :leftto="'foodList'" :name="'搜索'" ></headerBar>
         <div class="sear">
             <input type="text" placeholder="请输入商家或美食名称" v-model="txt" @input='inp($event)'>
@@ -82,9 +86,9 @@
 <script>
 import bottoms from '../components/bottom'
 import headerBar from '../components/HelloWorld'
-
+import Loading from '@/components/loading'
 export default{
-    components:{headerBar,bottoms},
+    components:{headerBar,bottoms,Loading},
     data(){
         return{
             txt:'',
@@ -93,7 +97,7 @@ export default{
             ars:[],
             typess:'',
             store:'',
-			isLoading: true
+			isLoading: false
         }
     },
     created(){
@@ -104,7 +108,8 @@ export default{
     },
     methods:{
         btn(){
-            this.store = ''
+			this.store = '';
+			this.isLoading=true
             this.$http.get('https://elm.cangdu.org/v4/restaurants',{
               params:{
                     geohash:'31.22967,121.4762',
@@ -115,12 +120,14 @@ export default{
                     this.types = data.data.length
                     if(this.types){
                         this.store = data.data
-                    }
-                // this.txts = data.data.message
+					}
+					this.typess = true
+				// this.txts = data.data.message
+				this.isLoading=false
             })
             this.ars.unshift(this.txt)
             localStorage.searchHistory = JSON.stringify(this.ars)
-            this.typess = true
+            
 			// this.isLoading= false
         },
         inp(e){

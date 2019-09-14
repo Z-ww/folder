@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-		<router-link to="/"></router-link>
+		<!-- <router-link to="/"></router-link> -->
     <transition name="fade">
       <router-view/>
     </transition>
@@ -9,12 +9,12 @@
 </template>
 
 <script>
-	import hello from '@/components/HelloWorld.vue'
+	// import hello from '@/components/HelloWorld.vue'
 
 
 export default {
   name: 'App',
-  components:{hello}
+  // components:{hello}
 }
 </script>
 

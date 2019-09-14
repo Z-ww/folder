@@ -121,7 +121,7 @@
                 //存储加入购物车的商品
                 shop_storage:[],
                 //加入购物车的个数
-                shop_nums:0
+                shop_nums:0,
                 
             }
         },
