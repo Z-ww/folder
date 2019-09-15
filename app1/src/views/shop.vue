@@ -1,6 +1,7 @@
 <template>
 <div class="shop" >
   <!-- 跳出购物车 -->
+  {{btn_type}}
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -84,7 +85,12 @@
       </div>
     </div>
     <div class="com_right">
-      还差￥20元起送
+      <div v-show="!btn_type">
+        差20元起送
+      </div>
+     <div v-show="btn_type">
+       去结算
+     </div>
     </div>
   </div>
   
@@ -122,13 +128,20 @@
                 shop_storage:[],
                 //加入购物车的个数
                 shop_nums:0,
+                //显示隐藏结算按钮
+                btn_type:false
                 
             }
         },
         watch:{
-            // Totalprice(a,b){
-            //   console.log(a,b)
-            // }
+            Totalprice(a,b){
+              console.log(a,b)
+              if(a>=20){
+                this.btn_type = true;
+              }else{
+                this.btn_type = false
+              }
+            }
         },
         created() {
            this.aaaaa()
@@ -396,10 +409,8 @@ nav>div p{
     height: 46px;
     float: left;
     background-color: #535258;
-    text-align: center;
     color: #fff;
-    line-height: 46px;
-    font-weight: 600;
+    font-weight: bold
   }
   .shop_img{
     width: 46px;
@@ -462,5 +473,20 @@ nav>div p{
   }
   .shop_name li{
  padding: 10px 10px;
+  }
+  .com_right div{
+    font-size:18px;
+    width:100%;
+    height:100%;
+    line-height: 250%;
+    text-align: center
+  }
+  .com_right div:last-of-type{
+    font-size:18px;
+    width:100%;
+    height:100%;
+    line-height: 250%;
+    text-align: center;
+    background-color: #4cd964;
   }
 </style>
