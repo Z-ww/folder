@@ -1,7 +1,8 @@
 <template>
 <div class="shop" >
   <!-- 跳出购物车 -->
-  {{btn_type}}
+  <!--{{btn_type}}-->
+  	 <headers  left="<" leftto="foodList" ></headers>
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -17,7 +18,7 @@
             <span style="color: #f60;">￥{{value.price}}</span>
             <span style="float:right;margin-left:10px;" @click="shop_clear(value)">删除</span>
             <span style="float:right">
-              {{value.num}}个数
+              {{value.num}} 份
             </span>
             
           </p>
@@ -102,10 +103,13 @@
 	import Loading from '@/components/loading'
 //this.$store.commit('settotalPrice',参数)
   import shopPing from '../components/shop.vue'
+   import headers from "../components/HelloWorld";
+
     export default {
         name: "shop",
         components: {
             shopPing,
+              headers,
             Loading,
             price:''
         },
@@ -260,6 +264,7 @@
 <style scoped>
 .shop{
   width: 100%;
+  padding-top: 50px;
 }
   header{
     width: 100%;

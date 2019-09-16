@@ -64,6 +64,27 @@ export default new Router({
 			component: () =>
 				import( /* webpackChunkName: "balance" */ '../views/balance2.vue')
 
+		},//收货地址
+		{
+			path: '/addTake',
+			name: 'addTake',
+			component: () =>
+				import( /* webpackChunkName: "balance" */ '../views/addTake.vue')
+
+		},
+		{
+			path: '/addTake1',
+			name: 'addTake1',
+			component: () =>
+				import( /* webpackChunkName: "balance" */ '../views/addTake1.vue')
+
+		},
+		{
+			path: '/getTakelist',
+			name: 'getTakelist',
+			component: () =>
+				import( /* webpackChunkName: "balance" */ '../views/getTakelist.vue')
+
 		},
 		//搜索
 		{

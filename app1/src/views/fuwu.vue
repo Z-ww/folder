@@ -1,9 +1,10 @@
 <template>
 	<div class="fuwu_box">
-		<div style="height: 50px;">
-			<headers left="<" leftto="mine" name="服务中心"></headers>
+		<div style="height: 60px; overflow: hidden;">、
+			<headers left="<" leftto="mine" name="服务中心" style='z-index: 2;'></headers>
 		</div>
-		<div class="z_box">
+		<div style="z-index: 1;position: relative;">
+			<div class="z_box">
 			<div>
 				<i class="icon iconfont icon-kefu" style="font-size: 22px;color: palevioletred;"></i>
 				在线客服
@@ -35,6 +36,7 @@
 				
 			</ul>
 		</div>	
+		</div>
 	</div>
 	
 </template>
@@ -77,28 +79,11 @@
 		width: 375px;
 		background: white;
 	}
-	.header{
-		height: 40px;
-		background: #3190e8;
-	}
-	.header span:nth-of-type(1){
-		font-size: 16px;
-		line-height: 40px;
-		padding-left: 10px;
-		color: #FFF;
-	}
-	.header span:nth-of-type(2){
-		font-size: 16px;
-		line-height: 40px;
-		padding-left: 160px;
-		color: #fff;
-	}
 	.z_box{
 		width: 375px;
-		height: 60px;
+		min-height: 80px;
 		position: relative;
 		font-size: 22px;
-		margin-bottom: 10px;
 	}
 	.z_box div{
 		width: 50%;

@@ -15,8 +15,10 @@
       <p>17694995488<span>></span></p>
     </div>
     <div class="item clearf">
-      <p>收货地址</p>
+    <router-link to='addTake'>
+    	  <p>收货地址</p>
       <p><span>></span></p>
+    </router-link>
     </div>
     <div class="set">
       <div class="top">账号绑定</div>
@@ -35,7 +37,7 @@
       </router-link>
     </div>
     <div class="btn">
-      <button>退出登录</button>
+      <button style="padding: 0 5px;"> 退出登录</button>
     </div>
   </div>
 </template>
