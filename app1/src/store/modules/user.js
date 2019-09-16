@@ -9,7 +9,8 @@ export default{
         userBalance:'',//余额
         latitude: '',//经度
         longitude: '',//纬度
-        totalPrice:''//购物车总价钱
+        totalPrice:'',//购物车总价钱
+        shopping: '',//食品信息
     },
     mutations:{
         setUserid(state,value){
@@ -42,6 +43,9 @@ export default{
       settotalPrice(state,value){
         state.totalPrice=value
       },
+      setshopping(state, value) {
+          state.shopping=value
+      }
     },
 
 }

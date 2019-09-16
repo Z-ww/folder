@@ -50,7 +50,7 @@
                     }
                 }).then((data)=>{
                     this.list_site=data.data
-                    console.log(data)
+//                  console.log(data)
                 })
             },
             btn2(a){

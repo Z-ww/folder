@@ -39,7 +39,7 @@ export default {
   },
   created() {
       this.is = this.nums
-      console.log(this.num)
+//    console.log(this.num)
   },
   
 }

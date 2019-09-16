@@ -118,7 +118,7 @@ export default{
 						order_by:data
 					}
 				}).then((data) => {
-					console.log(data)
+//					console.log(data)
 					this.store = data.data;
 					this.isLoading = false
 				})

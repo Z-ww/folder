@@ -3,6 +3,22 @@
   <!-- 跳出购物车 -->
   <!--{{btn_type}}-->
   	 <headers  left="<" leftto="foodList" ></headers>
+  <header>
+    <div class="bak">
+      <img :src="img_url+shop_list.image_path" alt="">
+    </div>
+    <div class="upmax"></div>
+    <div class="upcontent clearf">
+      <div class="up-left">
+        <img :src="img_url+shop_list.image_path" alt="">
+      </div>
+      <div class="up-right">
+        <h3>{{shop_list.name}}</h3>
+        <p><span>商家配送</span>/<span>分钟送达</span>/<span>{{shop_list.piecewise_agent_fee.tips}}</span></p>
+        <p>{{shop_list.promotion_info}}</p>
+      </div>
+    </div>
+  </header>
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -20,7 +36,7 @@
             <span style="float:right">
               {{value.num}} 份
             </span>
-            
+
           </p>
               </li>
       </ul>
@@ -37,7 +53,7 @@
     <div @click="type=true"><p :class="[type ? 'pin' : '']">商品</p></div>
     <div @click="type=false"><p :class="[!type ? 'pin' : '']">评价</p></div>
   </nav>
-  <div class="shopping clearf">
+  <div class="shopping clearf" v-if="type">
     <div class="left">
       <ul class="list">
         <li v-for="(i,index) in listFood" @click="num=index" :class="[num==index ? 'blue' : '']" :key="i+index">{{i.name}}</li>
@@ -72,6 +88,37 @@
       </div>
     </div>
   </div>
+  <div class="evaluate" v-if="!type">
+    <div class="pingjia">
+      <div class="item clearf" v-for="i in evaluate">
+        <div class="P_left">
+          <img src="../assets/default.jpg" alt="">
+        </div>
+        <div class="P_right">
+          <div class="t-ping clearf">
+            <span>{{i.username}}</span>
+            <span>{{i.rated_at}}</span>
+          </div>
+          <div class="b-ping">
+            <div class="b-t clearf">
+              <div>
+                <span v-for="a in i.rating_star"><i style="color: yellow" class="el-rate__icon el-icon-star-on"></i></span>
+              </div>
+              <p class="pone"> {{i.time_spent_desc}}</p>
+            </div>
+            <div class="b-content">
+              <div class="Img clearf">
+                <img :src="img_url+item.image_hash" alt="" v-for="item in i.item_ratings">
+              </div>
+              <div class="Osp">
+                <span v-for="j in i.item_ratings">{{j.food_name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="comped">
     <div class="com_left">
       <!-- <button style="width:100px;height:100px;"> -->
@@ -94,8 +141,8 @@
      </div>
     </div>
   </div>
-  
-  
+
+
 </div>
 </template>
 
@@ -120,6 +167,8 @@
                 listFood: '',//食品信息
                 img_url: '//elm.cangdu.org/img/',
                 isLoading: true,
+                shop_list: '',
+                evaluate: '',
                 //商品个数
                 nums:'',
                 //分类id
@@ -134,12 +183,12 @@
                 shop_nums:0,
                 //显示隐藏结算按钮
                 btn_type:false
-                
+
             }
         },
         watch:{
             Totalprice(a,b){
-              console.log(a,b)
+//            console.log(a,b)
               if(a>=20){
                 this.btn_type = true;
               }else{
@@ -149,7 +198,9 @@
         },
         created() {
            this.aaaaa()
-
+            this.shop_list = this.$store.state.user.shopping
+            this.pingjia()
+//          console.log(this.$store.state)
         },
         methods:{
           //删除商品
@@ -162,10 +213,10 @@
                 obj[key] = local[key]
               }
             }
-            console.log(obj)
+//          console.log(obj)
             localStorage.buyCart = JSON.stringify(obj)
            this.aaaaa();
-           
+
           },
           aaaaa(){
             this.food()
@@ -180,7 +231,7 @@
                     this.shop_nums+=arrs[key].num
                   }
             }
-            console.log(this.Totalprice)
+//          console.log(this.Totalprice)
           },
           //清空购物车
           clears(){
@@ -198,6 +249,16 @@
                 }).then((data)=>{
                     this.listFood=data.data
                     this.isLoading = false
+                })
+            },
+            // 评价
+            pingjia() {
+                this.$http.get('https://elm.cangdu.org/ugc/v2/restaurants/1/ratings', {
+                    params: {
+                        restaurant_id: this.shop_list.id
+                    }
+                }).then((data) => {
+                    this.evaluate = data.data
                 })
             },
             // abc(a,b){
@@ -218,7 +279,7 @@
                           price:a.specfoods[0].price,
                           item:a.specfoods[0].item_id
                  }
-                         
+
                 }
                 var typs = false;
               if(localStorage.buyCart){
@@ -229,33 +290,33 @@
                 var arrs = JSON.parse(str);
                 var itemid = a.specfoods[0].item_id
                 if(arrs[a.specfoods[0].item_id] != itemid){
-                  console.log('没重复，往里添加')
+//                console.log('没重复，往里添加')
                   arrs[itemid] = buyCartss[a.specfoods[0].item_id]
                   localStorage.buyCart = JSON.stringify(arrs)
                 }else{
-                  console.log('重复了')
-                  console.log(buyCartss)
+//                console.log('重复了')
+//                console.log(buyCartss)
                   localStorage.buyCart = JSON.stringify(buyCartss)
                 }
-                console.log(1111)
+//              console.log(1111)
               }else{
-                console.log(arrs)
+//              console.log(arrs)
                localStorage.buyCart = JSON.stringify(buyCartss)
                 var str =  localStorage.buyCart;
                 var arrs = JSON.parse(str);
               }
                var nnn = 0
-              
+
                this.shop_nums = 0;
                   for(var key in arrs){
                     nnn += arrs[key].num*arrs[key].price
-                    console.log(arrs[key].num)
+//                  console.log(arrs[key].num)
                     this.shop_nums+=arrs[key].num
                   }
                   this.Totalprice = nnn
                   this.shop_storage = arrs
-                   console.log(this.shop_nums)
-                
+//                 console.log(this.shop_nums)
+
             },
         }
     }
@@ -266,11 +327,68 @@
   width: 100%;
   padding-top: 50px;
 }
-  header{
-    width: 100%;
-    height: 90px;
-    background-color: red;
-  }
+header{
+  width: 100%;
+  height: 98px;
+  position: relative;
+  overflow: hidden;
+}
+.bak{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+}
+.bak img{
+  width: 100%;
+  height: 100%;
+}
+.upmax{
+  width: 100%;
+  height: 100%;
+  background: #ccc;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .8;
+}
+.upcontent{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.up-left{
+  width: 69px;
+  height: 69px;
+  float: left;
+  margin-right: 10px;
+  border: solid 1px #ccc;
+}
+.up-left img{
+  width: 100%;
+  height: 100%;
+}
+.up-right{
+  width: 220px;
+  float: left;
+  color: #fff;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.up-right h3{
+  font-size: 20px;
+  margin-top: 5px;
+}
+.up-right p{
+  font-size: 12px;
+  line-height: 23px;
+}
 
   .title{
     width: 50%;
@@ -464,7 +582,7 @@ nav>div p{
     /* margin:10px 14px; */
     font-size: 18px;
     color: #666;
-  
+
   }
   .shop_bottom .Shop_cart span{
     font-size: 14px;
@@ -473,7 +591,7 @@ nav>div p{
   .shop_name{
     font-size: 16px;
     font-weight: bold;
-   
+
         color: #666;
   }
   .shop_name li{
@@ -494,4 +612,83 @@ nav>div p{
     text-align: center;
     background-color: #4cd964;
   }
+.pin {
+  border-bottom: solid 2px blue;
+}
+.evaluate{
+  width: 100%;
+}
+.pingjia{
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.pingjia .item{
+  padding: 10px 0 15px;
+  border-top: solid 1px #f4f2f6;
+}
+.P_left{
+  width: 35px;
+  float: left;
+  margin-right: 20px;
+}
+.P_left img{
+  wdith: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.P_right{
+  width: 300px;
+  float: left;
+}
+.t-ping span:nth-of-type(1){
+  float: left;
+  font-size: 10px;
+}
+.t-ping span:nth-of-type(2) {
+  float: right;
+  font-size: 8px;
+  color: #afafaf;
+}
+.b-ping{
+  padding-top: 5px;
+}
+.b-t div{
+  float: left;
+}
+.b-t div span{
+  margin-top: 5px;
+}
+.b-t .pone{
+  float: left;
+  font-size: 14px;
+}
+.Img img{
+  margin-top: 7px;
+  width: 72px;
+  height: 72px;
+  float: left;
+  margin-right: 10px;
+  float: left;
+}
+.Osp{
+  margin-top: 10px;
+}
+.Osp span{
+  width: 53px;
+  height: 30px;
+  padding: 8px 6px;
+  box-sizing: border-box;
+  border: solid 1px #f2f2f2;
+  font-size: 13px;
+  color: #aeaeae;
+  float: left;
+  margin-right: 10px;
+  text-align: center;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+
+}
 </style>

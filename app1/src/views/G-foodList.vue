@@ -39,7 +39,7 @@
 					<span style="color:#999">附近商家</span>
 				</div>
 				<router-link :to="{name:'shop',query:{id:i.id}}" v-for="(i,index) in store" :key="index">
-					<div class="lists">
+					<div class="lists"  @click="city(index)">
 					<section>
 						<img v-lazy="'//elm.cangdu.org/img/'+i.image_path" alt="" class="shop_img" :key="i+index"/>
 					</section>
@@ -107,12 +107,12 @@
 			Loading
 		},
 		created() {
-			
+
 			this.gain()
 			this.rest()
 		},
 		mounted() {
-console.log(this.$store.state)
+//console.log(this.$store.state)
 			// console.log(this.$store.state.user.longitude)
 			new Swiper('.swiper-container', {
 					loop: false,
@@ -122,7 +122,7 @@ console.log(this.$store.state)
 					},
 				}),
 				this.dizi()
-			console.log(this.list_city)
+//			console.log(this.list_city)
 		},
 		methods: {
 			gain() {
@@ -131,7 +131,7 @@ console.log(this.$store.state)
 					this.da1 = dat.splice(0, 8);
 				})
 				this.$http.get('https://elm.cangdu.org/v2/index_entry', ).then((data) => {
-					console.log(data)
+//					console.log(data)
 					var dat = data.data;
 					this.da2 = dat.splice(8, 16);
 				})
@@ -153,9 +153,12 @@ console.log(this.$store.state)
 				this.$http.get('https://elm.cangdu.org/v2/pois/'+this.$store.state.user.latitude+','+this.$store.state.user.longitude+'', {
 				}).then((data) => {
 					this.list_city = data.data.name
-					console.log(data)
+//					console.log(data)
 				})
-			}
+			},
+        city(a){
+            this.$store.commit('setshopping',this.store[a])
+        }
 		}
 	}
 </script>h4
@@ -163,17 +166,17 @@ console.log(this.$store.state)
 	.swip {
 		margin-top: 50px;
 	}
-	
+
 	.swiper-container {
 		width: 100%;
 		height: 210px;
 	}
-	
+
 	.msite_nav {
 		margin-top: 50px;
 		background: white;
 	}
-	
+
 	.list {
 		width: 25%;
 		box-sizing: border-box;
@@ -185,13 +188,13 @@ console.log(this.$store.state)
 		font-size: 14px;
 		min-height: 50px;
 	}
-	
+
 	.item {
 		border-top: 20px solid #f5f5f5;
 		overflow: hidden;
 		background: white
 	}
-	
+
 	.hd {
 		height: 30px;
 		line-height: 30px;
@@ -200,38 +203,38 @@ console.log(this.$store.state)
 		opacity: 0.9;
 		margin-top: 4px
 	}
-	
+
 	.con {
 		text-align: center;
 	}
-	
+
 	.list img {
 		width: 40%;
 		height: 40px;
 		margin-bottom: 12px;
 	}
-	
+
 	.lists {
 		border-bottom: 2px solid #f1f1f1;
 		padding: 10px;
 		overflow: hidden;
 	}
-	
+
 	.shop_img {
 		margin-right: 10px;
 		width: 70px;
 		height: 70px;
 		float: left;
 	}
-	
+
 	.shop_right {
 		overflow: hidden;
 	}
-	
+
 	.shop_detail_header {
 		overflow: hidden;
 	}
-	
+
 	.shop_detail_header::before {
 		content: "\54C1\724C";
 		float: left;
@@ -243,7 +246,7 @@ console.log(this.$store.state)
 		border-radius: 4px;
 		margin-right: 10px;
 	}
-	
+
 	.shop_title {
 		font-size: 14px;
 		font-weight: bold;
@@ -253,84 +256,84 @@ console.log(this.$store.state)
 		width: 120px;
 		white-space: nowrap
 	}
-	
+
 	.shop_detail_header .shop_detail_ul {
 		list-style: none;
 		float: right;
 	}
-	
+
 	.shop_detail_header .shop_detail_ul li {
 		float: left;
 		font-size: 12px;
 		color: #999
 	}
-	
+
 	.shop_p1 {
 		/* padding: 10px; */
 		font-size: 10px;
 		margin: 8px 0;
 	}
-	
+
 	.shop_p1 ul {
 		float: left;
 	}
-	
+
 	.shop_p1 ul li {
 		color: #ff9a0d;
 		float: left;
 	}
-	
+
 	.shop_p1s {
 		color: #ff6000;
 		margin-left: 10px;
 	}
-	
+
 	.shop_p1 h5 {
 		float: right;
 	}
-	
+
 	.shop_p1 h5 span {
 		border-radius: 2px;
 		font-size: .02rem;
 	}
-	
+
 	.shop_p1 h5 span:first-of-type {
 		color: #fff;
 		background-color: #3190e8;
 		border: 2px solid #3190e8;
 	}
-	
+
 	.shop_p1 h5 span:last-of-type {
 		color: #3190e8;
 		border: 2px solid #3190e8;
 	}
-	
-	
-	
+
+
+
 	.segmentation {
 		margin: 0 4px;
 	}
-	
+
 	.shop_p2 p:first-of-type {
 		float: left;
 		color: #666;
 	}
-	
+
 	.shop_p2 p:last-of-type {
 		float: right;
 		color: #666;
 	}
-	
+
 	.shop_p2 p:last-of-type span:last-of-type {
 		color: #3190e8;
 	}
-	
+
 	.hello {
 		z-index: 4;
 	}
-	
+
 	a {
 		color: #666;
 	}
-	
+
 </style>
